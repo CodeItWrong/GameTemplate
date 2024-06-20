@@ -1,0 +1,6 @@
+Created temporary file C:\Users\Resourceful\AppData\Local\Temp\dbp82AC.tmp
+Writing project file C:\Users\Resourceful\AppData\Local\Temp\Temp.dbpro
+No icon is specified for the final exe
+Compiling C:\Users\Resourceful\Dropbox\Dynamic Resources\Projects\Name Resource Example\Name Resource Example.exe (current directory is C:\Users\Resourceful\AppData\Local\Temp\)
+Cleaning up
+Could not determine parameter type of 'DR Open Main Script()' at line 5.

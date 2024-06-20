@@ -1,0 +1,114 @@
+Rem ***** Included Source File *****
+Rem ***** Included Source File *****
+Rem Project: Timers
+Rem Created: Monday, November 07, 2011
+
+Rem ***** Main Source File *****
+Type Timers
+    StartTime#
+    OldTime#        
+    CurrentTime#        
+    Type$
+    Units$    
+    Name$
+EndType
+
+` Get Name from Timer Index (Lua)
+` Get Timer Index From Name (Lua)
+
+Setup_Timers()
+
+Create_EventTimer("MyTest", 10, "Seconds")
+
+Do
+    Print Timers(0).CurrentTime#
+    Update_EventTimers()
+Loop
+
+Function Setup_Timers()
+    Global Freq# : Freq# = GetFreq() ` Used to increase accuracy of the timer    
+    Global Dim Timers() As Timers
+EndFunction
+
+Function Create_Timer(Name$)
+    Add To Stack Timers()
+    Timers().Name$ = Name$
+    Timers().StartTime# = StartTime#    
+    Timers().OldTime# = PerfTimer()
+    Timers().Type$ = "Timer"
+EndFunction
+
+Function Create_EventTimer(Name$, StartTime#, Units$)
+    Add To Stack Timers()
+    Timers().Name$ = Name$
+    Timers().StartTime# = StartTime#    
+    Timers().OldTime# = PerfTimer()
+    Timers().Type$ = "EventTimer"
+    Timers().Units$ = Units$    
+EndFunction
+
+Function Update_EventTimers()    
+    Size = Array Count(Timers())
+
+    For Index = 0 To Size   
+        Select Timers(Index).Units$
+            Case "Hours"                
+                Timers(Index).CurrentTime# = Timers(Index).StartTime# - GetHours(Index)                             
+            EndCase
+            
+            Case "Minutes"
+                Timers(Index).CurrentTime# = Timers(Index).StartTime# - GetMinutes(Index)
+            EndCase
+            
+            Case "Seconds"
+                Timers(Index).CurrentTime# = Timers(Index).StartTime# - GetSeconds(Index)
+            EndCase
+            
+            Case "MiliSeconds"
+                Timers(Index).CurrentTime# = Timers(Index).StartTime# - GetMiliSeconds(Index)
+            EndCase
+        EndSelect    
+        
+        If Timers(Index).CurrentTime# <= 0.0                     
+            Pointer = Get Ptr To Function("TimerEnd_" + Timers(Index).Name$)
+                
+            If Function Ptr Is Valid(Pointer) = 1        
+                Call Function Ptr Pointer, Index                  
+            EndIf           
+        EndIf
+    Next Index
+EndFunction
+
+Function Reset_Timer(Index)    
+    Timers(Index).OldTime# = PerfTimer()
+EndFunction
+
+Function GetHours(Index)
+    Minutes# = (((PerfTimer() - Timers(Index).OldTime#) / Freq#) / 60.0) / 60.0
+EndFunction Minutes#
+
+Function GetMinutes(Index)
+    Minutes# = ((PerfTimer() - Timers(Index).OldTime#) / Freq#) / 60.0
+EndFunction Minutes#
+
+Function GetSeconds(Index)
+    Seconds# = (PerfTimer() - Timers(Index).OldTime#) / Freq#
+EndFunction Seconds#
+
+Function GetMiliSeconds(Index)
+    MiliSeconds# = ((PerfTimer() - Timers(Index).OldTime#) / Freq#) * 1000
+EndFunction MiliSeconds#
+
+` Called by Setup_Timers()
+Function GetFreq()
+    Load DLL "Kernel32.dll", 1
+
+    Memory = Make Memory(16)
+    Call Dll 1, "QueryPerformanceFrequency", Memory
+    Freq# = *Memory
+    
+    Delete DLL 1 : Delete Memory Memory    
+EndFunction Freq#
+
+
+

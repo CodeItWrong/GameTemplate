@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.4.1  (Win32)">
+	<META NAME="CREATED" CONTENT="20120930;21052365">
+	<META NAME="CHANGED" CONTENT="20120930;22124917">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Multi-Threading</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">Multi-Threading
+plugin is a plugin that is close to the performance plugin. It can
+create new threads which are just like functions but looped that are
+performance driven. Meaning it uses the same code that my Game
+Performance plugin uses. You can run your threads at a rate called
+Loops Per Second or LPS for short. I also added a resource query
+which is basically a list of resources to be loaded but on a new
+thread. You can only have one resource query thread to load objects.
+Having multiple resource queries or loading a resource at the same
+time the query is running will cause the game to crash.</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">However
+there are a few rules to running things threads: (To avoid crashes)</P>
+<UL>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">Do
+	not load resources while a query is loading resources</P>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">You
+	must not try accessing the same variable from two separate threads
+	at the same time without the use of a mutex. (MatrixUtils have
+	mutexes)</P>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">You
+	may not load a resource within a new thread at the same time a main
+	thread or another thread is loading resources. 
+	</P>
+</UL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">Dark
+Basic Pro is natively not thread safe. This means that there is no
+guarantee that Dark Basic Pro commands will work successfully in a
+thread.</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">What
+Multi-Threading is useful for:</P>
+<UL>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">Math
+	calculations</P>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">Loading
+	Resources using my resource query while the main loop is running</P>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">Physics</P>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">For
+	loops that are heavy in work or very long for loops that will hinder
+	with the game play</P>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">Input:
+	I created a plugin to handle multiple keys at once.</P>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal">And
+	many more!</P>
+</UL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Commands</B></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Start</B></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><FONT COLOR="#000000">This
+command will setup the multi-threading so you can use the commands</FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index
+= </SPAN></FONT><B>MT Create Task<FONT COLOR="#000000">(</FONT></B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">FunctionName$,
+LPSCap</SPAN></FONT><B><FONT COLOR="#000000">)</FONT></B></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><FONT COLOR="#0000ff"><FONT COLOR="#000000">This
+command will create a new multi-theaded task. You provide a Function
+Name that will be called. The LPS cap is the rate in Loops Per
+Second.</FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Type$
+= </SPAN></FONT><B>MT Get Task Type<FONT COLOR="#000000">()</FONT></B></FONT></P>
+<UL>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><FONT COLOR="#0000ff"><FONT COLOR="#000000">Time:
+	Will run the task for a certain amount of time</FONT></FONT></P>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><FONT COLOR="#0000ff"><FONT COLOR="#000000">Loop:
+	Will loop indefinitely</FONT></FONT></P>
+	<LI><P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><FONT COLOR="#0000ff"><FONT COLOR="#000000">Count:
+	Will run the task for a certain amount of iterations</FONT></FONT></P>
+	<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"></P>
+</UL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+End Task</B></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Set Task To Time </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index,
+Duration#</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will run a task for a certain amount of time. (Duration#) The
+Index is the Index of the already created Task.</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Set Task To Count </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index,
+Count</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will run a task for a certain amount of iterations. (Count)
+The Index is the Index of the already created Task.</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Set Task To Loop </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will run a task indefinitely. The Index is the Index of the
+already created Task.</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>-</B></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Pause Task </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><FONT COLOR="#0000ff"><FONT COLOR="#000000">This
+command will pause the task.</FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Resume Task </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will resume the pause tasked.</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Stop Task </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will stop the task.</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">index
+= </SPAN></FONT><B>MT Task Count</B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">()</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><FONT COLOR="#0000ff"><FONT COLOR="#000000">This
+command will return the amount of tasks that exists.</FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">index
+= </SPAN></FONT><B>MT Task Ended<FONT COLOR="#000000">()</FONT></B></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><FONT COLOR="#0000ff"><FONT COLOR="#000000">This
+command will return a 1 if the task has ended and a 0 if it hasn't.</FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Remove Task  </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in; font-weight: normal"><FONT COLOR="#0000ff"><FONT COLOR="#000000">This
+command will remove a task at Index.</FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Query Object  </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">ObjectIndex,
+Path$, PositionVector, RotateVector, Exclude Flag</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will add an object to the query. You provide a Path$ and an
+Object Index. The Position and Rotate Vectors are DBP vectors with
+the position and rotations set.  The Exclude flag set to 1 will
+exclude the object as soon as it is loaded and a 0 won't exclude it.</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Query Image  </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index,
+Path$</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will add a image to the query. You provide a Path$ and an
+Object Index. </SPAN></FONT></FONT>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Query Sound  </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index,
+Path$</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will add a sound to the query. You provide a Path$ and an
+Object Index. </SPAN></FONT></FONT>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><B>MT
+Query Music  </B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">Index,
+Path$</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will add music to the query. You provide a Path$ and an
+Object Index. </SPAN></FONT></FONT>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">ThreadIndex
+= </SPAN></FONT><B>MT Load Resources</B><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">()</SPAN></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000"><SPAN STYLE="font-weight: normal">This
+command will create a new thread where it will go through the queried
+resources and load them one at a time.</SPAN></FONT></FONT></P>
+</BODY>
+</HTML>

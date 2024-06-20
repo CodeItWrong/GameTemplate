@@ -1,0 +1,112 @@
+Rem Project: MultiThreading0
+Rem Created: Saturday, September 15, 2012
+
+Rem ***** Main Source File *****
+MT Start
+
+AutoCam Off
+Sync On : Sync rate 30
+
+MT Query Object 1, "Models\Asteroids\AST_01.X", 0, 0, 0
+MT Query Object 2, "Models\Asteroids\AST_02.X", 0, 0, 0
+MT Query Object 3, "Models\Asteroids\AST_03.X", 0, 0, 0
+MT Query Object 4, "Models\Asteroids\AST_04.X", 0, 0, 0
+MT Query Object 5, "Models\Asteroids\AST_05.X", 0, 0, 0
+MT Query Object 6, "Models\Asteroids\AST_01.X", 0, 0, 0
+MT Query Object 7, "Models\Asteroids\AST_02.X", 0, 0, 0
+MT Query Object 8, "Models\Asteroids\AST_03.X", 0, 0, 0
+MT Query Object 9, "Models\Asteroids\AST_04.X", 0, 0, 0
+MT Query Object 10, "Models\Asteroids\AST_05.X", 0, 0, 0
+MT Query Object 11, "Models\Asteroids\AST_01.X", 0, 0, 0
+MT Query Object 12, "Models\Asteroids\AST_02.X", 0, 0, 0
+MT Query Object 13, "Models\Asteroids\AST_03.X", 0, 0, 0
+MT Query Object 14, "Models\Asteroids\AST_04.X", 0, 0, 0
+MT Query Object 15, "Models\Asteroids\AST_05.X", 0, 0, 0
+
+// MT Query Sound 1, "Sounds\Guns\Automatic loop.wav"
+// MT Query Sound 2, "Sounds\Guns\Automatic reload.wav"
+// MT Query Sound 3, "Sounds\Guns\Beam.wav"
+// MT Query Sound 4, "Sounds\Guns\Blaster.wav"
+// MT Query Sound 5, "Sounds\Guns\Crossbow.wav"
+// MT Query Sound 6, "Sounds\Guns\Fist1.wav"
+// MT Query Sound 7, "Sounds\Guns\Fist2.wav"
+// MT Query Sound 8, "Sounds\Guns\Grappling hook.wav"
+// MT Query Sound 9, "Sounds\Guns\Gun 1.wav"
+// MT Query Sound 10, "Sounds\Guns\Gun 2.wav"
+// MT Query Sound 11, "Sounds\Guns\Gun 3.wav"
+// MT Query Sound 12, "Sounds\Guns\Gun 4.wav"
+// MT Query Sound 13, "Sounds\Guns\Gun 5.wav"
+// MT Query Sound 14, "Sounds\Guns\Gun 6.wav"
+// MT Query Sound 15, "Sounds\Guns\Gun 7.wav"
+// 
+// MT Query Music 1, "Music\mp3\music fun.mp3"
+// MT Query Music 2, "Music\mp3\music misty room.mp3"
+// MT Query Music 3, "Music\mp3\music space.mp3"
+// MT Query Music 4, "Music\mp3\music fun.mp3"
+// MT Query Music 5, "Music\mp3\music misty room.mp3"
+// MT Query Music 6, "Music\mp3\music space.mp3"
+// MT Query Music 7, "Music\mp3\music triumph.mp3"
+// MT Query Music 8, "Music\mp3\music triumph.mp3"
+// MT Query Music 9, "Music\mp3\music fun.mp3"
+// MT Query Music 10, "Music\mp3\music misty room.mp3"
+// MT Query Music 11, "Music\mp3\music space.mp3"
+// MT Query Music 12, "Music\mp3\music triumph.mp3"
+// MT Query Music 13, "Music\mp3\music fun.mp3"
+// MT Query Music 14, "Music\mp3\music misty room.mp3"
+// MT Query Music 15, "Music\mp3\music space.mp3"
+// MT Query Music 16, "Music\mp3\music triumph.mp3"
+// 
+// MT Query Image 1, "Textures\barnacles.bmp"
+// MT Query Image 2, "Textures\brick1_T.bmp"
+// MT Query Image 3, "Textures\bunker.bmp"
+// MT Query Image 4, "Textures\Cement_render.bmp"
+// MT Query Image 5, "Textures\concrete_T.bmp"
+// MT Query Image 6, "Textures\cornice.bmp"
+// MT Query Image 7, "Textures\Dappled_fur.bmp"
+// MT Query Image 8, "Textures\door01.bmp"
+// MT Query Image 9, "Textures\door02.bmp"
+// MT Query Image 10, "Textures\flakeywall.bmp"
+// MT Query Image 11, "Textures\fur.bmp"
+// MT Query Image 12, "Textures\georgian.bmp"
+// MT Query Image 13, "Textures\gothic_T.bmp"
+// MT Query Image 14, "Textures\Granite_chippings_T.bmp"
+// MT Query Image 15, "Textures\grass_T.bmp"
+// MT Query Image 16, "Textures\lead.bmp"
+
+Index = MT Load Resources()
+
+Do
+    Control Camera Using ArrowKeys 0, 1, 1
+  
+    If (MT Task Ended(Index) = 1)
+        Message "Resources Have Loaded"
+        MT Remove Task Index
+    EndIf
+    
+    Sync // Must run sync while resources are loading or crash!!!!!
+Loop
+
+
+` Dependency function: DON'T FORGET THIS!
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Inclu`de 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+   x$ = Get File Name$()
+   x$ = Mid$("", 1)
+   x$ = Get Dir$()
+   x = Function Ptr Is Valid(345)
+   x = perftimer()
+   Close File 1
+EndFunction

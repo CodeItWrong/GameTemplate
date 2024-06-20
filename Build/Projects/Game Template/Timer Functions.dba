@@ -1,0 +1,8 @@
+Rem ***** Included Source File *****
+```````````````````````
+` Timer End Functions `
+```````````````````````````````````````````````````````````````````````````````````````````````````
+` Function TimerEnd_TimerName(Index)
+Function TimerEnd_MyTest(Index)
+    Reset_Timer(Index)
+EndFunction

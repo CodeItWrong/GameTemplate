@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.4.1  (Win32)">
+	<META NAME="CREATED" CONTENT="20120713;21492301">
+	<META NAME="CHANGED" CONTENT="20120918;22562548">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Time</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">Timing
+plugin is for getting accurate time back in either Mili-Seconds,
+Seconds,  Minutes, Hours, or Days. You can set the time factor which
+is how many hours equals 24 hour or 1 day. You can test if it is day
+or night time using Is Day and Is Night commands. The event timers
+will run a function after a certain duration. You can loop it which
+means it will run the function every duration seconds.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command is
+called to setup the Timing Plugin</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000080">Time Setup</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command is
+how you create a new timer. It returns the index of the timer</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff"><FONT COLOR="#000000">Index</FONT>
+<FONT COLOR="#000000">= </FONT>Time Create Timer<FONT COLOR="#000000">()</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` These commands
+will return the time in a certain unit (seconds, minutes, hours,
+ect). Returns the time# for the timer Index.</FONT></P>
+<P STYLE="margin-bottom: 0in">time# = <FONT COLOR="#0000ff">Time Get
+Hours</FONT>(Index)</P>
+<P STYLE="margin-bottom: 0in">time# = <FONT COLOR="#0000ff">Time Get
+Minutes</FONT>(Index)</P>
+<P STYLE="margin-bottom: 0in">time# = <FONT COLOR="#0000ff">Time Get
+Seconds</FONT>(Index)</P>
+<P STYLE="margin-bottom: 0in">time# = <FONT COLOR="#0000ff">Time Get
+MiliSeconds</FONT>(Index)</P>
+<P STYLE="margin-bottom: 0in">time# = <FONT COLOR="#0000ff">Time Get
+Days</FONT>(Index)</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command
+will set the Factor# which is the amount of time in hours per 24
+cycle. </FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff">Time Set Factor</FONT>
+Index, Factor#</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` These commands
+will return a 1 if it is Day or if it is Night and a 0 if it is not.</FONT></P>
+<P STYLE="margin-bottom: 0in">IsDay = <FONT COLOR="#0000ff">Time Is
+Day</FONT>()</P>
+<P STYLE="margin-bottom: 0in">IsNight = <FONT COLOR="#0000ff">Time Is
+Night</FONT>()</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command
+will return how many timers are created</FONT></P>
+<P STYLE="margin-bottom: 0in">Index = <FONT COLOR="#0000ff">Time
+Count</FONT>()</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command
+will delete a timer at Index</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff">Time Delete <FONT COLOR="#000000">Index</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command
+will create an event timer. You provide a function name to call, a
+duration which is how long before you call the function, and a
+restart flag to if set to 1 will loop the event timer.</FONT></P>
+<P STYLE="margin-bottom: 0in">Index = <FONT COLOR="#0000ff">Time
+Create Event Timer</FONT>(FunctionName$, Duration#, Restart)</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command
+will update all the Event Timers</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff">Time Update Event
+Timers</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command
+will return a 1 if the Event Timer has ended</FONT></P>
+<P STYLE="margin-bottom: 0in">HasEnded = <FONT COLOR="#0000ff">Time
+Has Ended</FONT>()</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command
+will stop an Event Timer</FONT> 
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff">Time Stop Event
+Timer</FONT> Index</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#008000">` This command
+will restart and Event Timer. If restart is set to 1 it will loop the
+Event Timer</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#0000ff">Time Start Event
+Timer</FONT> Index, Restart</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,40 @@
+Rem Project: Timer Rate
+Rem Created: Friday, July 13, 2012
+
+Rem ***** Main Source File *****
+Sync On : Sync Rate 30
+
+Time Setup
+
+MyTimer = Time Create Timer()
+MyTimer2 = Time Create Timer()
+
+` 2 = 2 Hours To 24 Hours Conversion rate
+Time Set Factor MyTimer, 2 
+
+Do 
+   CLS 
+   Text 0,0, Str$(Time Get Seconds(MyTimer))
+   Text 0,20, Str$(Time Get Seconds(MyTimer2))
+    
+    Sync
+Loop
+
+` Dependency function
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Include 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+   x = Timer()
+EndFunction

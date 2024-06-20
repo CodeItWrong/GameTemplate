@@ -1,0 +1,42 @@
+Rem ***** Included Source File *****
+```````````````````
+` Input Functions `
+`````````````````````````````````````````````````````````````````````````````````````````````````````````
+` Function FunctionTag_KeyName (Uppercase) or Function FunctionTag_MouseButtonName
+` Key Tags: "KeyPressed_", "KeyReleased_", "KeyDown_"
+` Any/No Key Tags: "AnyKey", "AnyKey_Down", "AnyKey_Pressed", "AnyKey_Released", "NoKey", "NoKey_Down", "NoKey_Pressed", "NoKey_Released"
+` Mouse Tags: "MousePressed_", "MouseReleased_", "MouseDown_"
+` Mouse Buttons: "Left", "Right", "Middle"
+` Ex: Function KeyPressed_K() or Function MousePressed_Left() or Function AnyKey_Pressed()
+
+Function MousePressed_Left()    
+    If ObjectMode = 1
+        If HoveredObject.Object <> 0             
+            If SelectedObjectCount <> 0        
+                For i = 0 To SelectedObjectCount - 1
+                    If Object = SelectedObjects(i).Object                         
+                        Array Delete Element SelectedObjects(0), i
+                        SelectedObjectCount = SelectedObjectCount - 1
+                        GoTo SkipSelectingObject                    
+                    EndIf
+                Next i
+            Endif
+            
+            Clear Array SelectedObjects() : SelectedObjectCount = 0   
+            
+            ` Add Selected Object To Array SelectedObjects                   
+            Add To Stack SelectedObjects(SelectedObjectCount)
+            SelectedObjects(SelectedObjectCount).Object = Object
+            SelectedObjectCount = SelectedObjectCount + 1                                  
+        EndIf
+        
+        SkipSelectingObject:
+    EndIf    
+EndFunction
+
+Function KeyPressed_L() 
+    `Input "|Load Object| Object's Name: ", Name$ 
+    `- Input is not displayed. Use entry instead to get text (GUI)
+    `Database_LoadObject(Name$)
+    Dialog_LoadObject()
+EndFunction

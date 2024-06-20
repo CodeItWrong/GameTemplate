@@ -1,0 +1,33 @@
+Rem Project: Update Resource Indexes
+Rem Created: Sunday, July 08, 2012
+
+Rem ***** Main Source File *****
+MyObject = DR Next Object()
+Make Object Sphere MyObject, 10
+
+Delete Object MyObject
+
+DR Update Indexes 5 ` Just updates once so it will only find one index!
+
+MyNewObject = DR Next Object()
+
+Message Str$(MyNewObject)
+End
+
+` Dependency function: DON'T FORGET THIS!
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Include 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+EndFunction

@@ -1,0 +1,73 @@
+Rem Project: Input
+Rem Created: Tuesday, September 25, 2012
+
+Rem ***** Main Source File *****
+Rem Project: Dark Basic Pro Project
+Rem Created: Tuesday, September 25, 2012
+
+Rem ***** Main Source File *****
+Disable Escapekey
+
+Key Setup 30
+
+Do
+    If InKey$() = "p" Then Key Pause Thread
+    If InKey$() = "r" Then  Key Resume Thread
+    
+    If EscapeKey() = 1 Then Exit
+    //Key Update
+LOOP
+
+Key End Thread
+End
+
+Function KeyPressed_A()
+    print "Pressed A"
+ENDFUNCTION
+
+Function KeyReleased_A()
+    print "Released A"
+ENDFUNCTION
+
+Function KeyDown_B()
+    print "Down B"
+ENDFUNCTION
+
+// Function MouseDown_Left()
+//     print "Mouse Down Left"
+// ENDFUNCTION
+
+Function MousePressed_Left()
+    print "Mouse Pressed Left"
+ENDFUNCTION
+
+Function MousePressed_Right()
+    print "Mouse Pressed Right"
+ENDFUNCTION
+
+Function MouseReleased_Left()
+    print "Mouse Released Left"
+ENDFUNCTION
+
+
+` Dependency function: DON'T FORGET THIS!
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Include 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+   x$ = Get File Name$()
+   x$ = Mid$("", 1)
+   x$ = Get Dir$()
+   x = KeyState(1)
+EndFunction

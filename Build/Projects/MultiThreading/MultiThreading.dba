@@ -1,0 +1,63 @@
+Rem Project: MultiThreading
+Rem Created: Saturday, September 15, 2012
+
+MT Start
+
+Global Count
+
+Index = MT Create Task("Count", 30)
+//MT Set Task To Time Index, 10
+//MT Set Task To Count Index, 10
+
+Do   
+    If InKey$() = "p"
+        MT Pause Task Index2
+    EndIf
+    
+    If InKey$() = "r"
+        MT Resume Task Index2
+    EndIf
+    
+    If InKey$() = "s"
+        MT Stop Task Index2
+    EndIf
+   
+    CLS
+    Text 0, 0, Str$(Count)
+    
+    if escapekey() = 1 then exit
+    Sync
+LOOP
+
+MT End Task Index
+
+End
+
+Function Count()
+    Count = Count + 1
+EndFunction
+
+` Dependency function: DON'T FORGET THIS!
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Inclu`de 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+   x$ = Get File Name$()
+   x$ = Mid$("", 1)
+   x$ = Get Dir$()
+   x = Function Ptr Is Valid(345)
+   x = perftimer()
+   Make Memblock From Mesh 1, 1
+   Close File 1
+EndFunction

@@ -1,0 +1,45 @@
+Rem Project: Delete Resource Example
+Rem Created: Sunday, July 08, 2012
+
+Rem ***** Main Source File *****
+MyObject = DR Next Object()
+Make Object Sphere MyObject, 10
+
+MyObject2 = DR Next Object()
+Make Object Sphere MyObject2, 10
+
+DR Delete Object MyObject2 ` Object MUST exist to be able to delete it
+
+MyObject3 = DR Next Object()
+Make Object Sphere MyObject3, 10
+
+` Delete the objects
+DR Delete Object MyObject
+DR Delete Object MyObject3
+
+Do
+    Text 0, 0, "Notice how the last two are the same. The index was recycled."
+    Text 0, 20, Str$(MyObject)
+    Text 0, 40, Str$(MyObject2)
+    Text 0, 60, Str$(MyObject3)
+Loop
+
+End
+
+` Dependency function: DON'T FORGET THIS!
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Include 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+EndFunction

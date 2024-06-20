@@ -1,0 +1,210 @@
+Rem ***** Included Source File *****
+Rem ***** Included Source File *****
+```````````````````````````
+` Load Resource Functions `
+````````````````````````````````````````````````````````````````````````````````````````````````
+
+``````````````````````
+` Requires Dark Data `
+``````````````````````
+
+Function Database_LoadObject(Name$)    
+    KFS Reset 2    
+    Record = KFS Find(2, Lower$(Name$))
+
+    If Record > 0 ` Negitive/Zero = Not Found
+        DFS Load 1, Record
+    
+        If DFS Get$(1, "Type") = "Object"
+            If DFS Get$(1, "Name") = Name$            
+                If File Exist(DFS Get$(1, "Path")) = 1
+                    Index = NextObject()  
+                
+                    Load Object DFS Get$(1, "Path"), Index                   
+                    Lua_NameObject(Index, DFS Get$(1, "Name"))
+                Else
+                    If DebugMode = 1 Then Send_Error$("File Error: File " + DFS Get$(1, "Path") + " doesn't exist!")
+                Endif
+            Else
+                If DebugMode = 1 Then Send_Error$("Name Error:" + DFS Get$(1, "Name"))
+            EndIf
+        Else
+            If DebugMode = 1 Then Send_Error$("Type Error:" + DFS Get$(1, "Type"))
+        EndIf
+    Else
+        If DebugMode = 1 Then Send_Error$("Record with the name: " + Name$ + " doesn't exist.")
+    EndIf
+EndFunction Index
+
+Function Database_LoadSound(Name$)    
+    KFS Reset 2    
+    Record = KFS Find(2, Lower$(Name$))
+        
+    If Record > 0 ` Negitive/Zero = Not Found     
+        DFS Load 1, Record
+    
+        If DFS Get$(1, "Type") = "Sound"
+            If DFS Get$(1, "Name") = Name$            
+                If File Exist(DFS Get$(1, "Path")) = 1
+                    Index = NextSound()
+                
+                    Load Sound DFS Get$(1, "Path"), Index                    
+                    Lua_NameSound(Index, DFS Get$(1, "Name"))
+                Else
+                    If DebugMode = 1 Then Send_Error$("File Error: File " + DFS Get$(1, "Path") + " doesn't exist!")
+                Endif
+            Else
+                If DebugMode = 1 Then Send_Error$("Name Error:" + DFS Get$(1, "Name"))
+            EndIf
+        Else
+            If DebugMode = 1 Then Send_Error$("Type Error:" + DFS Get$(1, "Type"))
+        EndIf
+    Else
+        If DebugMode = 1 Then Send_Error$("Record with the name: " + Name$ + " doesn't exist.")
+    EndIf
+EndFunction Index
+
+Function Database_LoadMusic(Name$)    
+    KFS Reset 2    
+    Record = KFS Find(2, Lower$(Name$))
+        
+    If Record > 0 ` Negitive/Zero = Not Found
+        DFS Load 1, Record
+    
+        If DFS Get$(1, "Type") = "Music"
+            If DFS Get$(1, "Name") = Name$            
+                If File Exist(DFS Get$(1, "Path")) = 1
+                    Index = NextMusic()
+                
+                    Load Music DFS Get$(1, "Path"), Index                  
+                    Lua_NameMusic(Index, DFS Get$(1, "Name"))
+                Else
+                    If DebugMode = 1 Then Send_Error$("File Error: File " + DFS Get$(1, "Path") + " doesn't exist!")
+                Endif
+            Else
+                If DebugMode = 1 Then Send_Error$("Name Error:" + DFS Get$(1, "Name"))
+            EndIf
+        Else
+            If DebugMode = 1 Then Send_Error$("Type Error:" + DFS Get$(1, "Type"))
+        EndIf
+    Else
+        If DebugMode = 1 Then Send_Error$("Record with the name: " + Name$ + " desn't exist.")
+    EndIf
+EndFunction Index
+
+Function Database_LoadEffect(Name$)    
+    KFS Reset 2    
+    Record = KFS Find(2, Lower$(Name$))
+    
+    If Record > 0 ` Negitive/Zero = Not Found
+        DFS Load 1, Record
+    
+        If DFS Get$(1, "Type") = "Effect"
+            If DFS Get$(1, "Name") = Name$            
+                If File Exist(DFS Get$(1, "Path")) = 1
+                    Index = NextEffect()
+                    
+                    Load Effect DFS Get$(1, "Path"), Index, 0                    
+                    Lua_NameEffect(Index, DFS Get$(1, "Name"))
+                Else
+                    If DebugMode = 1 Then Send_Error$("File Error: File " + DFS Get$(1, "Path") + " doesn't exist!")
+                Endif
+            Else
+                If DebugMode = 1 Then Send_Error$("Name Error:" + DFS Get$(1, "Name"))
+            EndIf
+        Else
+            If DebugMode = 1 Then Send_Error$("Type Error:" + DFS Get$(1, "Type"))
+        EndIf
+    Else
+        If DebugMode = 1 Then Send_Error$("Record with the name: " + Name$ + " doesn't exist.")
+    EndIf   
+EndFunction Index
+
+Function Database_LoadImage(Name$)    
+    KFS Reset 2    
+    Record = KFS Find(2, Lower$(Name$))
+         
+    If Record > 0 ` Negitive/Zero = Not Found
+        DFS Load 1, Record
+            
+        If DFS Get$(1, "Type") = "Image"
+            If DFS Get$(1, "Name") = Name$            
+                If File Exist(DFS Get$(1, "Path")) = 1
+                    Index = NextImage()
+                    
+                    Load Image DFS Get$(1, "Path"), Index                   
+                    Lua_NameImage(Image, DFS Get$(1, "Name"))
+                Else
+                    If DebugMode = 1 Then Send_Error$("File Error: File " + DFS Get$(1, "Path") + " doesn't exist!")
+                Endif
+            Else
+                If DebugMode = 1 Then Send_Error$("Name Error:" + DFS Get$(1, "Name"))
+            EndIf
+        Else
+            If DebugMode = 1 Then Send_Error$("Type Error:" + DFS Get$(1, "Type"))
+        EndIf
+    Else
+        If DebugMode = 1 Then Send_Error$("Record with the name: " + Name$ + " doesn't exist.")
+    EndIf
+EndFunction Index
+
+Function Database_LoadAnimation(Name$)    
+    KFS Reset 2    
+    Record = KFS Find(2, Lower$(Name$))
+            
+    If Record > 0 ` Negitive/Zero = Not Found
+        DFS Load 1, Record
+            
+        If DFS Get$(1, "Type") = "Animation"
+            If DFS Get$(1, "Name") = Name$            
+                If File Exist(DFS Get$(1, "Path")) = 1                                        
+                    Index = EnAn_AnimLoad(DFS Get$(1, "Path"))                    
+                    Lua_NameAnimation(Index, DFS Get$(1, "Name"))
+                Else
+                    If DebugMode = 1 Then Send_Error$("File Error: File " + DFS Get$(1, "Path") + " doesn't exist!")
+                Endif
+            Else
+                If DebugMode = 1 Then Send_Error$("Name Error:" + DFS Get$(1, "Name"))
+            EndIf
+        Else
+            If DebugMode = 1 Then Send_Error$("Type Error:" + DFS Get$(1, "Type"))
+        EndIf
+    Else
+        If DebugMode = 1 Then Send_Error$("Record with the name: " + Name$ + " doesn't exist.")
+    EndIf
+EndFunction Index
+
+``````````
+`ADD ON: `
+``````````````````````
+` Resource Searching `
+`````````````````````````````````````````````````````````````````````````````````````````````
+Function File_ResourceSearch(Name$)    
+    `If DebugMode = 1 Then Message ("Warning: Do not use this search method during game run-time it is very slow!")
+
+    Count = Array Count(Files()) : Record = -1
+    
+    For Index = 0 To Count
+        If Files(Index).Name$ = Name$            
+            Record = Index
+            Exit
+        EndIf
+    Next Index
+    
+    If Record = -1 ` Negitive = Not Found
+        `If DebugMode = 1 Then Message ("Record with the name: " + Name$ + " Doesn't Exist.")
+    EndIf
+EndFunction Record
+
+Function Database_ResourceSearch(Name$)
+    KFS Reset 2    
+    Record = KFS Find(2, Lower$(Name$))
+        
+    If Record <= 0 ` Negitive/Zero = Not Found        
+        If DebugMode = 1 Then Message ("Record with the name: " + Name$ + " Doesn't Exist.")
+    EndIf
+EndFunction Record
+
+Function Lua_ResourceSearch(Name$)
+    Record = Lua_FileGet(Name$)   
+EndFunction Record

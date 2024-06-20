@@ -1,0 +1,441 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.4  (Win32)">
+	<META NAME="CREATED" CONTENT="20120707;23434507">
+	<META NAME="CHANGED" CONTENT="20120708;13360849">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+		A:link { so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Next Resource</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">The
+next resource commands will return the next free index.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Object()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Sprite()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Emitter()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Vector()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Memblock()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Camera()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Image()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Effect()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Sound()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Mesh()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Music()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next File()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Matrix()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Object()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Lookup()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Bank()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Mutex()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Dll()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Animation()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Coroutine()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Light()</B></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Delete Resource</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">The
+delete resource commands will recycle an index that you are no longer
+using anymore and delete the object. If the object has a name please
+use the delete commands with a LUA tag instead of a DR tag.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Object index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Sprite index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Emitter index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Memblock index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Camera index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Image index </B>
+</P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Effect index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Sound index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Mesh index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Music index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Matrix index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Database index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Lookup index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Bank index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Mutex index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Dll index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Animation index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Coroutine index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Close File index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Vector3 index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Vector2 index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Vector4 index</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Light index</B></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>LUA Delete Resource</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">The
+delete resource commands will delete the resource and recycles the
+index.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Object Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Sprite Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Emitter Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Memblock Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Camera Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Image Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Effect Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Sound Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Mesh Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Music Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Matrix Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Database Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Lookup Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Bank Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Mutex Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Dll Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Animation Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Coroutine Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Close File Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Vector3 Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Vector2 Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Vector4 Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Thread Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete ArrayFile Name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Light Name$</B></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Update Indexes</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">This
+command will search though each resource and add any commands that
+were deleted without using my delete commands.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>DR Update Indexes maxindex     </B>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Free Resource</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">Free
+resource commands will search though indexes starting at 1 and
+counting up until it finds a free index.</P>
+<P STYLE="margin-bottom: 0in"><B>index =  DR Free Object(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Sprite(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Emitter(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Vector(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Memblock(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Camera(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Image(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Effect(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Sound(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Mesh(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Music(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free File(Index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Dll(Index)  </B>
+</P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Free Light(Index)  </B>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Get Resource Index</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">The
+get resource index commands will return the index it is currently at.
+It isn't a resource count.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Object Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Image Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Camera Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Effect Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Sound Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Mesh Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR  Get Music Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get File Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Emitter Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Sprite Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index  = DR Get Matrix Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Vector Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Database Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Lookup Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Memblock Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Bank Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Coroutine Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Mutex Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Dll Index()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Animation Index() </B>
+</P>
+<P STYLE="margin-bottom: 0in">    
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Open/Close Main Script</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">The
+open/close main script commands are used to open the main.lua file
+that is provided. This will allow you to use the commands tagged LUA.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>exist = DR Open Main Script</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Close Main Script     </B>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Name Resource</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">The
+name resource commands will assign a name to a resources index. This
+way you can easily get an index from a name.</P>
+<P STYLE="margin-bottom: 0in">  
+</P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Object index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Image index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Camera index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Effect index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Sound index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Mesh  index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Music index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name File index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Emitter index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Sprite index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Matrix index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Vector index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Database index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Lookup index  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Memblock index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Bank index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Coroutine index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Mutex index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Animation index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Thread index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name ArrayFile index,  name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Dll index, name$</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Name Light index, name$</B></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Get Resource Index From
+Name</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">You
+give a name and it will get the resources index for that name.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Object(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Image(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Camera(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Effect(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Sound(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Mesh(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Vector(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Matrix(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Sprite(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Emitter(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Music(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get File(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get ArrayFile( name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Get Dll(name$)  </B>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Lua Free Resource</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">The
+lua free resource command is just like the free resource command
+except you can set the object name of the item free that is found.</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Object(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Sprite(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Emitter(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Memblock(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Camera(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Image(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Effect(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Sound(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Mesh(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Music(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free File(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Dll(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Free Light(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Set Start Index</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">This
+command is how you can set the start index of the Free Resource
+commands.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>DR Set Start Index index</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Lua Next Resource</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">These
+commands are just like the Next Resource commands but it also sets
+the name of the object.</P>
+<P STYLE="margin-bottom: 0in"> 
+</P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Next Object(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index =  LUA Next Sprite(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Emitter(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Vector(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Memblock(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Camera(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Image(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Effect(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Sound(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Mesh(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Music(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next File(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Matrix(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Object(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next LookUp(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Bank(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Mutex(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Dll(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Animation(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Coroutine(name$) </B>
+</P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Light(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Shortcut Commands    </B>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">These
+commands are shortcuts to the original DBP commands. The LUA tagged
+commands you can set the name of the resource you loaded or created.
+DR tagged are just normal load/create command. The commands assign an
+index to the object loaded/created and returns it as an integer. Uses
+the new Next Free Resource commands!</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Load Object(name$,
+path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Load Object(path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Load Image(name$, path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Load Image(path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Load Effect(name$,
+path$, textureflag)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Load Effect(path$,
+textureflag)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Load Sound(name$, path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Load Sound(path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Load Mesh(name$, path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Load Mesh(path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Load Music(name$, path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Load Music(path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Open To Read(path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Open To Read(name$,
+path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Open To Write(name$,
+path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Open To Write(path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Load Dll(name$, path$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Load Dll(path$)  </B>
+</P>
+<P STYLE="margin-bottom: 0in">   
+</P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Make Object Plain(name$,
+width#, height#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Make Object Plain(width#,
+height#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Make Object
+Sphere(name$, size#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Make Object Sphere(size#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Make Object Cone(name$,
+size#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Make Object Cone(size#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Make Object
+Cylinder(name$, Size#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Make Object
+Cylinder(size#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Make Object
+Triangle(name$, X1#, Y1#, Z#2,  X2#,  Y2#,  Z1#,  X3#,  Y3#,  Z3#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Make Object Triangle(X1#,
+Y1#,  Z2#,  X2#,  Y2#,  Z1#,  X3#,  Y3#,  Z3#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Create Sprite(name$,
+image, x#, y#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Create Sprite(image, x#,
+y#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Create Camera()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Create Camera(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Make Object Box(width#,
+height#, depth#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Make Object Box(Name,
+width#,  height#,  depth#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Make Object Cube(name$,
+size#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Make Object Cube(size#)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Object To Mesh(name$,
+object)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Object To Mesh(object)   
+ </B>
+</P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Make Matrix(width#, 
+height#, XSeg, ZSeg)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Make Matrix(name$,
+width#,  height#, XSeg, ZSeg)</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Close Current File  </B>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Item Resource Commands 
+  </B>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">I
+created an item type so you can use your own resource items and keep
+track of their indexes. This will only work for one item type.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Item()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Item(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Delete Item(index)</B></P>
+<P STYLE="margin-bottom: 0in"><B>LUA Delete Item(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>DR Name Item(int Index, name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Get Item(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Next Free Resource</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">This
+command will find the next available resource. It is a combination
+between the next resource and free resource commands.</P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Light()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Object()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Sprite()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Emitter()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Memblock()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Camera()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Image()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Effect()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Sound()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Mesh()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Music()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free File()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Matrix()</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = DR Next Free Dll()</B></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><B>LUA Next Free Resource</B></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; font-weight: normal">This
+command will find the next available resource. It is a combination
+between the next resource and free resource commands. This version
+will set the name of the resource as well.</P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Object(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Sprite(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Emitter(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free
+Memblock(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Camera(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Image(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Effect(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Sound(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Mesh(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Music(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free File(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Matrix(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Dll(name$)</B></P>
+<P STYLE="margin-bottom: 0in"><B>index = LUA Next Free Light(name$)</B></P>
+</BODY>
+</HTML>

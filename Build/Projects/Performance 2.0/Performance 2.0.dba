@@ -1,0 +1,65 @@
+Rem Project: Performance 2.0
+Rem Created: Monday, September 17, 2012
+
+Rem ***** Main Source File *****
+Global Count
+
+GP Setup
+
+Sync On : Sync Rate 0
+
+Index = GP Create Task("MainLoop", 30)
+Index2 = GP Create Task("DisplayLoop", 30)
+//GP Set Task To Time Index, 10
+//GP Set Task To Count Index, 10
+
+Index2 = GP Create Task("DisplayLoop", 30)
+
+Do   
+   If InKey$() = "p"
+       GP Pause Task Index2
+   EndIf
+   
+   If InKey$() = "r"
+       GP Resume Task Index2
+   EndIf
+   
+   If InKey$() = "s"
+       GP Stop Task Index2
+   EndIf
+   
+   GP Update
+Loop
+
+Function MainLoop()
+    Count = Count + 1
+EndFunction
+
+Function DisplayLoop()    
+    CLS
+    Text 0, 0, "MainLoop Count: " + Str$(Count)
+    Text 0, 20, "FPS: " + Str$(Screen FPS())
+    FastSync    
+EndFunction
+
+` Dependency function
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Include 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+   x = Timer()
+   Call Function Name ""
+   Wait 1 
+   Nice Wait 1
+EndFunction

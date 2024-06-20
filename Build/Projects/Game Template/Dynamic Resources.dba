@@ -1,0 +1,735 @@
+Rem ***** Included Source File *****
+Rem ***** Included Source File *****
+Function Setup_DynamicResources()
+    ````````````````````
+    ` Dynamic Resource `
+    `````````````````````````````````````````````````````````````````````````````````````````````````````````        
+    ` Index 1 is a Temp Index for every resource
+    ` Vector has 3 Temp Indexes: Vector1, Vector2, VectorResult    
+    
+    ````````````````````
+    ` Resource Indexes `
+    ````````````````````
+    
+    ` Indexes/Counts of each resource
+    Global ObjectIndex : ObjectIndex = 1
+    Global ImageIndex : ImageIndex = 1
+    Global CameraIndex : CameraIndex = 1
+    Global EffectIndex : EffectIndex = 1 
+    Global SoundIndex : SoundIndex = 1 
+    Global MeshIndex : MeshIndex = 1 
+    Global MusicIndex : MusicIndex = 1 
+    Global FileIndex : FileIndex = 1 
+    Global EmitterIndex : EmitterIndex = 1 
+    Global SpriteIndex : SpriteIndex = 1 
+    Global MatrixIndex : MatrixIndex = 1 
+    Global VectorIndex : VectorIndex = 2
+    Global DatabaseIndex : DatabaseIndex = 1
+    Global LookupIndex : LookupIndex = 1
+    Global MemblockIndex : MemblockIndex = 1
+    Global BankIndex : BankIndex = 1
+    Global CoroutineIndex : CoroutineIndex = 0 ` No need for a temp index
+    Global MutexIndex : MutexIndex = 0 ` No need for a temp index
+    Global DllIndex : DllIndex = 0
+    `Global AnimationIndex : AnimationIndex = 0
+
+    `````````````````````
+    ` Deleted Resources `
+    `````````````````````
+
+    ` DeletedAnimations and DeletedCoroutines are not needed. Automatically handled by template.
+    ` Stores deleted resources for recycling    
+    Global Dim DeletedObjects()
+    Global Dim DeletedSprites()
+    Global Dim DeletedEmitters()
+    Global Dim DeletedVectors()
+    Global Dim DeletedMemblocks()
+    Global Dim DeletedCameras()
+    
+    Global Dim DeletedImages()
+    Global Dim DeletedEffects()
+    Global Dim DeletedSounds()
+    Global Dim DeletedMeshs()
+    Global Dim DeletedMusic()
+    Global Dim DeletedFiles()
+    Global Dim DeletedMatrixes()
+    Global Dim DeletedDatabases()
+    Global Dim DeletedLookups()
+    Global Dim DeletedBanks()
+    Global Dim DeletedMutexes()
+    Global Dim DeletedDlls()
+    `Global Dim DeletedAnimations()
+    `Global Dim DeletedCoroutines()    
+EndFunction
+
+` Typically Garbage Collection is only needed for resource that are deleted often
+` If item is greater then the Index then don't add!
+Function Coroutine_GarbageCollection()
+    ` To reduce the time it takes per step figure the resource with the highest number    
+    MaxValue = Max(ObjectIndex, ImageIndex)
+    MaxValue = Max(MaxValue, CameraIndex)
+    MaxValue = Max(MaxValue, EffectIndex)
+    MaxValue = Max(MaxValue, SoundIndex)
+    MaxValue = Max(MaxValue, MeshIndex)
+    MaxValue = Max(MaxValue, MusicIndex)
+    MaxValue = Max(MaxValue, FileIndex)
+    MaxValue = Max(MaxValue, EmitterIndex)
+    MaxValue = Max(MaxValue, SpriteIndex)
+    MaxValue = Max(MaxValue, MatrixIndex)
+    MaxValue = Max(MaxValue, VectorIndex)
+    MaxValue = Max(MaxValue, DatabaseIndex)
+    MaxValue = Max(MaxValue, LookupIndex)
+    MaxValue = Max(MaxValue, MemblockIndex)
+    MaxValue = Max(MaxValue, BankIndex)
+    MaxValue = Max(MaxValue, CoroutineIndex)
+    
+    For Index = 2 To MaxValue    
+        If Index <= ObjectIndex            
+            If Object Exist(Index) = 0
+                Add To Stack DeletedObjects()    
+                   DeletedObjects() = Index   
+            EndIf
+        EndIf
+        
+        If Index <= SpriteIndex
+            If Sprite Exist(Index) = 0
+                Add To Stack DeletedSprites()    
+                   DeletedSprites() = Index   
+            EndIf
+        EndIf
+                
+        ` Special Case: Skip 2 for VectorIndex
+        If Index <= VectorIndex    
+            If Vector Exist(Index) = 0 And Index <> 2
+                Add To Stack DeletedVectors()    
+                   DeletedVectors() = Index   
+            EndIf
+        EndIf
+        
+        If Index <= MemblockIndex
+            If Memblock Exist(Index) = 0
+                Add To Stack DeletedMemblocks()    
+                   DeletedMemblocks() = Index   
+            EndIf
+        EndIf        
+        
+        If Index <= EmitterIndex
+            If Particles Exist(Index) = 0
+                Add To Stack DeletedEmitters()    
+                   DeletedEmitters() = Index   
+            EndIf    
+        EndIf
+        
+        If Index <= CameraIndex
+            If Camera Exist(Index) = 0
+                Add To Stack DeletedCameras()    
+                   DeletedCameras() = Index   
+            EndIf    
+        EndIf
+        
+        remstart
+        If Coroutine Exists(Index) = 0
+            Add To Stack DeletedCoroutines()    
+               DeletedCoroutines() = Index   
+        EndIf        
+        remend
+        
+        If Index <= ImageIndex
+            If Image Exist(Index) = 0
+                Add To Stack DeletedImages()    
+                   DeletedImages() = Index   
+            EndIf    
+        EndIf
+        
+        If Index <= MeshIndex
+            If Mesh Exist(Index) = 0
+                Add To Stack DeletedMeshs()    
+                   DeletedMeshs() = Index   
+            EndIf
+        EndIf
+        
+        If Index <= EffectIndex
+            If Effect Exist(Index) = 0
+                Add To Stack DeletedEffects()    
+                   DeletedEffects() = Index   
+            EndIf
+        EndIf
+        
+        If Index <= SoundIndex
+            If Sound Exist(Index) = 0
+                Add To Stack DeletedSounds()    
+                   DeletedSounds() = Index   
+            EndIf
+        EndIf
+        
+        If Index <= MusicIndex
+            If Music Exist(Index) = 0
+                Add To Stack DeletedMusic()    
+                   DeletedMusic() = Index   
+            EndIf
+        EndIf
+        
+        If Index <= FileIndex
+            If File Open(Index) = 0
+                Add To Stack DeletedFiles()    
+                   DeletedFiles() = Index   
+            EndIf
+        EndIf
+                
+        If Index <= MatrixIndex
+            If Matrix Exist(Index) = 0
+                Add To Stack DeletedMatrixes()    
+                   DeletedMatrixes() = Index   
+            EndIf        
+        EndIf
+    
+        If Index <= DatabaseIndex
+            If Vector Exist(Index) = 0
+                Add To Stack DeletedDatabases()    
+                   DeletedDatabases() = Index   
+            EndIf
+        EndIf
+        
+        If Index <= LookupIndex
+            If Lookup Exist(Index) = 0
+                Add To Stack DeletedLookups()    
+                   DeletedLookups() = Index   
+            EndIf
+        EndIf
+        
+        If Index <= BankIndex
+            If Bank Exist(Index) = 0
+                Add To Stack DeletedBanks()    
+                   DeletedBanks() = Index   
+            EndIf
+        EndIf
+        
+        If Index <= DllIndex
+            If DLL Exist(Index) = 0
+                Add To Stack DeletedDlls()    
+                   DeletedDlls() = Index                   
+            EndIf
+        EndIf
+        
+        Next Coroutine
+    Next Index
+EndFunction
+
+`````````````````````````````
+` Delete Resource Functions `
+````````````````````````````````````````````````````````````````````````````````````````````````
+Function DeleteObject(Index)
+    Add To Stack DeletedObjects()    
+       DeletedObjects() = Index   
+       Delete Object Index
+EndFunction
+
+Function DeleteSprite(Index)
+    Add To Stack DeletedSprites()    
+       DeletedSprites() = Index   
+       Delete Sprite Index
+EndFunction
+
+Function DeleteMemblock(Index)
+    Add To Stack DeletedMemblocks()    
+       DeletedMemblocks() = Index   
+       Delete Memblock Index
+EndFunction
+
+Function DeleteCamera(Index)
+    Add To Stack DeletedCameras()    
+       DeletedCameras() = Index   
+       Delete Camera Index
+EndFunction
+
+Function DeleteEmitter(Index)
+    Add To Stack DeletedEmitters()    
+       DeletedEmitters() = Index   
+       Delete Emitter Index
+EndFunction
+
+Function DeleteVector2(Index)
+    Add To Stack DeletedVectors()    
+       DeletedVectors() = Index   
+    NULL = Delete Vector2(Index)
+EndFunction
+
+Function DeleteVector3(Index)
+    Add To Stack DeletedVectors()    
+       DeletedVectors() = Index   
+    NULL = Delete Vector3(Index)
+EndFunction
+
+Function DeleteVector4(Index)
+    Add To Stack DeletedVectors()    
+       DeletedVectors() = Index   
+    NULL = Delete Vector4(Index)
+EndFunction
+
+Function DeleteImage(Index)
+    Add To Stack DeletedImages()    
+       DeletedImages() = Index   
+       Delete Image Index
+EndFunction
+
+Function DeleteEffect(Index)
+    Add To Stack DeletedEffects()    
+       DeletedEffects() = Index   
+       Delete Effect Index
+EndFunction
+
+Function DeleteSound(Index)
+    Add To Stack DeletedSounds()    
+       DeletedSounds() = Index   
+       Delete Sound Index
+EndFunction
+
+Function DeleteMesh(Index)
+    Add To Stack DeletedMeshs()    
+       DeletedMeshs() = Index   
+       Delete Mesh Index
+EndFunction
+
+Function DeleteMusic(Index)
+    Add To Stack DeletedMusic()    
+       DeletedMusic() = Index   
+       Delete Music Index
+EndFunction
+
+Function CloseFile(Index)
+    Add To Stack DeletedFiles()    
+       DeletedFiles() = Index   
+       Close File Index
+EndFunction
+
+Function DeleteMatrix(Index)
+    Add To Stack DeletedMatrixes()    
+       DeletedMatrixes() = Index   
+       Delete Matrix Index
+EndFunction
+
+Function CloseDFS(Index)
+    Add To Stack DeletedDatabases()    
+       DeletedDatabases() = Index   
+       DFS Close Index
+EndFunction
+
+Function CloseKFS(Index)
+    Add To Stack DeletedDatabases()    
+       DeletedDatabases() = Index   
+       KFS Close Index
+EndFunction
+
+Function DeleteLookup(Index)
+    Add To Stack DeletedLookups()    
+       DeletedLookups() = Index   
+       Delete Lookup Index
+EndFunction
+
+Function DeleteBank(Index)
+    Add To Stack DeletedBanks()    
+       DeletedBanks() = Index   
+       Delete Bank Index
+EndFunction
+
+Function DeleteMutex(Index)
+    Add To Stack DeletedMutexes()    
+       DeletedMutexes() = Index   
+       Delete SysObj Index
+EndFunction
+
+RemStart
+Function DeleteAnimation(Index)
+    Add To Stack DeletedAnimations()    
+       DeletedAnimations() = Index          
+       EnAn_AnimDelete Index
+EndFunction
+Remend
+
+```````````````````````
+` Next Resource Index `
+````````````````````````````````````````````````````````````````````````````````````````````````
+Function NextObject()    
+    If Array Count(DeletedObjects()) > -1    
+        Index = DeletedObjects()
+        Remove From Stack DeletedObjects()        
+    Else
+        ObjectIndex = ObjectIndex + 1    
+        Index = ObjectIndex    
+    EndIf       
+EndFunction Index
+
+Function NextImage()
+    If Array Count(DeletedImages()) > -1    
+        Index = DeletedImages()
+        Remove From Stack DeletedImages()        
+    Else
+        ImageIndex = ImageIndex + 1
+        Index = ImageIndex
+    EndIf
+EndFunction Index
+
+Function NextCamera()
+    If Array Count(DeletedCameras()) > -1    
+        Index = DeletedCameras()
+        Remove From Stack DeletedCameras()        
+    Else    
+        CameraIndex = CameraIndex + 1
+        Index = CameraIndex
+    EndIf
+EndFunction Index
+
+Function NextEffect()
+    If Array Count(DeletedEffects()) > -1    
+        Index = DeletedEffects()
+        Remove From Stack DeletedEffects()        
+    Else    
+        EffectIndex = EffectIndex + 1
+        Index = EffectIndex
+    EndIf
+EndFunction Index
+
+Function NextSound()    
+    If Array Count(DeletedSounds()) > -1    
+        Index = DeletedSounds()
+        Remove From Stack DeletedSounds()        
+    Else
+        SoundIndex = SoundIndex + 1
+        Index = SoundIndex
+    EndIf
+EndFunction Index
+
+Function NextMesh()    
+    If Array Count(DeletedMeshs()) > -1    
+        Index = DeletedMeshs()
+        Remove From Stack DeletedMeshs()        
+    Else
+        MeshIndex = MeshIndex + 1
+        Index = MeshIndex
+    EndIf
+EndFunction Index
+
+Function NextMemblock()
+    If Array Count(DeletedMemblocks()) > -1    
+        Index = DeletedMemblocks()
+        Remove From Stack DeletedMemblocks()        
+    Else
+        MemblockIndex = MemblockIndex + 1
+        Index = MemblockIndex
+    EndIf
+EndFunction Index
+
+Function NextVector()
+    If Array Count(DeletedVectors()) > -1    
+        Index = DeletedVectors()
+        Remove From Stack DeletedVectors()        
+    Else    
+        VectorIndex = VectorIndex + 1
+        Index = VectorIndex
+    EndIf
+EndFunction Index
+
+Function NextEmitter()
+    If Array Count(DeletedEmitters()) > -1    
+        Index = DeletedEmitters()
+        Remove From Stack DeletedEmitters()        
+    Else 
+        EmitterIndex = EmitterIndex + 1
+        Index = EmitterIndex
+    EndIf
+EndFunction Index
+
+Function NextMusic()
+    If Array Count(DeletedMusic()) > -1    
+        Index = DeletedMusic()
+        Remove From Stack DeletedMusic()        
+    Else    
+        MusicIndex = MusicIndex + 1
+        Index = MusicIndex
+    EndIf
+EndFunction Index
+
+Function NextFile()    
+    If Array Count(DeletedFiles()) > -1    
+        Index = DeletedFiles()
+        Remove From Stack DeletedFiles()        
+    Else
+        FileIndex = FileIndex + 1
+        Index = FileIndex
+    EndIf
+EndFunction Index
+
+Function NextSprite()    
+    If Array Count(DeletedSprites()) > -1        
+        Index = DeletedSprites()
+        Remove From Stack DeletedSprites()        
+    Else
+        SpriteIndex = SpriteIndex + 1        
+        Index = SpriteIndex
+    EndIf   
+EndFunction Index
+
+Function NextMatrix()
+    If Array Count(DeletedMatrixes()) > -1        
+        Index = DeletedMatrixes()
+        Remove From Stack DeletedMatrixes()        
+    Else
+        MatrixIndex = MatrixIndex + 1
+        Index = MatrixIndex
+    EndIf   
+EndFunction Index
+
+Function NextDatabase()
+    If Array Count(DeletedDatabases()) > -1        
+        Index = DeletedDatabases()
+        Remove From Stack DeletedDatabases()        
+    Else
+        DatabaseIndex = DatabaseIndex + 1
+        Index = DatabaseIndex
+    EndIf 
+EndFunction Index
+
+Function NextLookup()
+    If Array Count(DeletedLookups()) > -1        
+        Index = DeletedLookups()
+        Remove From Stack DeletedLookups()        
+    Else
+        LookupIndex = LookupIndex + 1
+        Index = LookupIndex            
+    EndIf           
+    
+    Make LookUp Index
+EndFunction Index
+
+Function NextBank()
+    If Array Count(DeletedBanks()) > -1        
+        Index = DeletedBanks()
+        Remove From Stack DeletedBanks()        
+    Else
+        BankIndex = BankIndex + 1
+        Index = BankIndex
+    EndIf 
+EndFunction Index
+
+Function NextCoroutine()
+    `If Array Count(DeletedCoroutines()) > -1        
+        `Index = DeletedCoroutines()
+        `Remove From Stack DeletedCoroutines()        
+    `Else
+        CoroutineIndex = CoroutineIndex + 1
+        Index = CoroutineIndex
+    `EndIf 
+EndFunction Index
+
+Function NextMutex()
+    If Array Count(DeletedMutexes()) > -1        
+        Index = DeletedMutexes()
+        Remove From Stack DeletedMutexes()        
+    Else
+        MutexIndex = MutexIndex + 1
+        Index = MutexIndex
+    EndIf 
+EndFunction Index
+
+Function NextDll()
+    If Array Count(DeletedDlls()) > -1        
+        Index = DeletedDlls()
+        Remove From Stack DeletedDlls()                
+    Else
+        DllIndex = DllIndex + 1
+        Index = DllIndex        
+    EndIf 
+EndFunction Index
+
+RemStart
+Function NextAnimation()
+    If Array Count(DeletedAnimations()) > -1        
+        Index = DeletedAnimations()
+        Remove From Stack DeletedAnimations()        
+    Else
+        AnimationIndex = AnimationIndex + 1
+        Index = AnimationIndex
+    EndIf 
+EndFunction Index
+RemEnd
+````````````````````````````````````````````````````````````````````````````````````````````
+
+``````````````````````
+` Find Free Resource `
+`````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+Function FreeObject()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Object Exist(i) = 0
+EndFunction i
+
+Function FreeImage()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Image Exist(i) = 0
+EndFunction i
+
+Function FreeCamera()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Camera Exist(i) = 0
+EndFunction i
+
+Function FreeEffect()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Effect Exist(i) = 0
+EndFunction i
+
+Function FreeSound()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Sound Exist(i) = 0
+EndFunction i
+
+Function FreeMesh()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Mesh Exist(i) = 0
+EndFunction i
+
+Function FreeMusic()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Music Exist(i) = 0
+EndFunction i
+
+Function FreeEmmitter()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Particles Exist(i) = 0
+EndFunction i
+
+Function FreeSprite()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Sprite Exist(i) = 0
+EndFunction i
+
+Function FreeFile()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until File Open(i) = 0
+EndFunction i
+
+Function FreeMatrix()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Matrix Exist(i) = 0
+EndFunction i
+
+Function FreeVector()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Vector Exist(i) = 0
+EndFunction i
+
+Function FreeLookup()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Lookup Exist(i) = 0
+EndFunction i
+
+Function FreeMemblock()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Memblock Exist(i) = 0
+EndFunction i
+
+Function FreeBank()
+    If DebugMode = 1 Then Write FileMap String "Warning","Warning: Do not use find free resource functions during game run-time it is very slow!"
+    Repeat : Inc i, 1 : Until Bank Exist(i) = 0
+EndFunction i
+
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+
+```````````````````
+` Extra Functions `
+```````````````````````````````````
+Function LoadObject(Path$)
+    Object = NextObject()      
+    Load Object Path$, Object
+EndFunction Object
+
+Function LoadImage(Path$)
+   Image = NextImage()
+   Load Image Path$, Image
+EndFunction Image
+
+Function LoadEffect(Path$)
+   Effect = NextEffect()      
+   Load Effect Path$, Effect, 0
+EndFunction Effect
+
+Function LoadSound(Path$)
+   Sound = NextSound()
+   Load Sound Path$, Sound
+EndFunction Sound
+
+Function LoadMusic(Path$)
+   Music = NextMusic()
+   Load Music Path$, Music
+EndFunction Music
+
+Function LoadMesh(Path$)
+   Mesh = NextMesh()
+   Load Mesh Path$, Mesh
+EndFunction Mesh
+
+Function OpenFileToWrite(Path$)
+   File = NextFile()
+   Open To Write File, Path$
+EndFunction File
+
+Function OpenFileToRead(Path$)
+   File = NextFile()
+   Open To Read File, Path$
+EndFunction File
+
+Function CloseCurrentFile()
+   Close File FileIndex
+EndFunction
+
+Function LoadSprite(Path$, X, Y)
+   Image = NextImage()
+   Index = NextSprite()
+
+   Load Image Path$, Image
+   Sprite Index, X, Y, Image
+EndFunction Index
+
+Function CreateSprite(X#, Y#, Image)
+    Index = NextSprite()
+    Sprite Index, X#, Y#, Image
+EndFunction Index
+
+Function CreateCamera()   
+    Index = NextCamera()
+    Make Camera Index
+EndFunction Index
+
+Function CreateSphere(Size#)    
+    Index = NextObject()
+    Make Object Sphere Index, Size#
+EndFunction Index
+
+Function CreateComplexSphere(Size#, Rows, Columns)    
+    Index = NextObject()
+    Make Object Sphere Index, Size#, Rows, Columns
+EndFunction Index
+
+Function CreateCube(Size#)    
+    Index = NextObject()
+    Make Object Cube Index, Size#
+EndFunction Index
+
+Function ObjectToMesh(Object)    
+    Index = NextMesh()
+    Make Mesh From Object NextMesh(), Object
+EndFunction Index
+
+Function MeshToObject(Mesh)
+    Index = NextObject()
+    Make Object Index, Mesh, 0
+EndFunction Index
+
+Function CreateAnimatedSprite(FileName$, Across, Down)    
+    Index = NextSprite()
+    Create Animated Sprite Index, FileName$, Across, Down, NextImage()
+EndFunction Index
+
+Function LoadDll(DllName$)
+    Index = NextDll()
+    Load DLL DllName$, Index
+EndFunction Index

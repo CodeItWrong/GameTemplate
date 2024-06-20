@@ -1,0 +1,51 @@
+Rem Project: Name Resource Example
+Rem Created: Sunday, July 08, 2012
+
+Rem ***** Main Source File *****
+Exist = DR Open Main Script("Main.lua") ` Have to open the main script to use
+`Exist = DR Open Main Script("")
+
+LUA Name Object 1, "MyObject"
+Index = Lua Get Object("MyObject")
+
+Print "Notice how the index is 1 which is the index I set MyObject to."
+Print Index
+
+` Shortcut
+Index = Lua Next Object("MySecondObject") ` Suggest this method to manually setting indexes.
+Index2 = Lua Get Object("MySecondObject")
+
+Print "Notice how the indexes match!"
+Print Index
+Print Index2
+
+Wait Key
+
+` In this example you can write over them!
+`LUA Name Object 1, "MyObject"
+`Index = Lua Get Object("My Object")
+
+`LUA Name Object 1, "DiffObject"
+`Index = Lua Get Object("My Object")
+
+DR Close Main Script ` Don't forget to close it!
+
+End
+
+` Dependency function: DON'T FORGET THIS!
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Include 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+EndFunction

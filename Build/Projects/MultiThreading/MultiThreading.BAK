@@ -1,0 +1,76 @@
+Rem Project: MultiThreading
+Rem Created: Saturday, September 15, 2012
+
+MT Start
+
+Global Count
+
+Index = MT Create Task("Count", 30)
+//MT Set Task To Time Index, 10
+//MT Set Task To Count Index, 10
+
+Do   
+    If InKey$() = "p"
+        MT Pause Task Index2
+    EndIf
+    
+    If InKey$() = "r"
+        MT Resume Task Index2
+    EndIf
+    
+    If InKey$() = "s"
+        MT Stop Task Index2
+    EndIf
+   
+    CLS
+    Text 0, 0, Str$(Count)
+    
+    if escapekey() = 1 then exit
+    Sync
+LOOP
+
+MT End Task Index
+
+End
+
+Function Count()
+    Count = Count + 1
+EndFunction
+
+` Dependency function: DON'T FORGET THIS!
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Inclu`de 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+   x$ = Get File Name$()
+   x$ = Mid$("", 1)
+   x$ = Get Dir$()
+   x = Function Ptr Is Valid(345)
+   x = perftimer()
+   Make Memblock From Mesh 1, 1
+   Close File 1
+EndFunction
+
+//  1 "MT Start%0%StartMultiThreading" //DLLCMDC void StartMultiThreading(int DllIndex)
+//     2 "MT Create Thread Task[%LSL%MTCreateThread" //DLLCMDC int MTCreateThread(LPSTR FunctionName, int LPSCap)
+//     3 "MT Close Thread Task%L%MTCloseThread" // DLLCMDC void MTCloseThread(int Index)   
+//     4 "MT Get Task Type[%SL%GetTaskType"     // DLLCMDC DWORD GetTaskType(char * OldString, int Index)
+//     5 "MT End Task%L%EndTask"     // DLLCMDC void EndTask(int Index)
+//     6 "MT Set Task To Time%LL%SetTaskToTime"     // DLLCMDC void SetTaskToTime(int Index, int Duration)
+//     7 "MT Set Task To Count%LL%SetTaskToCount"     // DLLCMDC void SetTaskToCount(int Index, int Count)
+//     8 "MT Set Task To Loop%L%SetTaskToLoop"     // DLLCMDC void SetTaskToLoop(int Index)
+//    
+//     9 "MT Pause Task%L%PauseTask"     // DLLCMDC void PauseTask(int Index)
+//     10 "MT Resume Task%L%ResumeTask"     // DLLCMDC void ResumeTask(int Index)
+//     11 "MT Stop Task%L%StopTask"     // DLLCMDC void StopTask(int Index)   

@@ -1,0 +1,361 @@
+Rem ***** Included Source File *****
+Rem ***** Included Source File *****
+```````````````````````````````
+` Unity Lua: Load Main Script `
+````````````````````````````````````````````````````````````````````````````````````````````````
+Function Lua_LoadScript()
+    Success = Load Lua("Media\Scripts\Main.lua")
+        
+    `Debugging for loading
+    Select Success    
+        Case 1            
+            If DebugMode = 1 Then Send_Error$("Error Loading Script: Error occurred running the script")
+        EndCase
+        
+        Case 2        
+            If DebugMode = 1 Then Send_Error$("Error Loading Script: Syntax error")
+        EndCase
+        
+        Case 3            
+            If DebugMode = 1 Then Send_Error$("Error Loading Script: Required memory could not be allocated")
+        Endcase
+        
+        Case 4            
+            If DebugMode = 1 Then Send_Error$("Error Loading Script: Error with error reporting mechanism.")
+        Endcase
+        
+        Case 5            
+            If DebugMode = 1 Then Send_Error$("Error reading or opening script file. Check Filename.")
+        Endcase    
+    EndSelect
+EndFunction Success
+
+````````````````````````````````````````````
+` Unity Lua: Resource Name To Index Script `
+````````````````````````````````````````````````````````````````````````````````````````````````
+Function Lua_GetObject(Name$)
+    Lua Set Function "GetObject", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetObject() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetImage(Name$)
+    Lua Set Function "GetImage", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetImage() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetCamera(Name$)
+    Lua Set Function "GetCamera", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetCamera() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetEffect(Name$)
+    Lua Set Function "GetEffect", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetEffect() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetSound(Name$)
+    Lua Set Function "GetSound", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetSound() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetMesh(Name$)
+    Lua Set Function "GetMesh", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetMesh() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetMusic(Name$)
+    Lua Set Function "GetMusic", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetMusic() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetFile(Name$)
+    Lua Set Function "GetFile", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetFile() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetEmitter(Name$)
+    Lua Set Function "GetEmitter", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetEmitter() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetSprite(Name$)
+    Lua Set Function "GetSprite", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetSprite() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetMatrix(Name$)
+    Lua Set Function "GetMatrix", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetMatrix() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetVector(Name$)
+    Lua Set Function "GetVector", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetVector() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetDatabase(Name$)
+    Lua Set Function "GetDatabase", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetDatabase() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetLookup(Name$)
+    Lua Set Function "GetLookup", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetLookup() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetBank(Name$)
+    Lua Set Function "GetBank", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetBank() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetCoroutine(Name$)
+    Lua Set Function "GetCoroutine", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetCoroutine() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetMutex(Name$)
+    Lua Set Function "GetMutex", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetMutex() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetAnimationByName(Name$)
+    Lua Set Function "GetAnimation", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetAnimation() with name: " + Name$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_GetAnimation(ObjectName$, AnimationName$)
+    Lua Set Function "GetAnimation", 1, 1
+    Lua Push String ObjectName$ + "_" +  AnimationName$
+    Lua Call
+    
+    Index = Lua Return Int()
+    If DebugMode = 1 Then If Index = 0 Then Send_Error$("Lua_GetAnimation() with name: " + ObjectName$ + "_" +  AnimationName$ + " wasn't found!")
+EndFunction Index
+
+Function Lua_NameObject(Index, Name$)
+    Lua Set Function "NameObject", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameImage(Index, Name$)
+    Lua Set Function "NameImage", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameCamera(Index, Name$)
+    Lua Set Function "NameCamera", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameEffect(Index, Name$)
+    Lua Set Function "NameEffect", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameSound(Index, Name$)
+    Lua Set Function "NameSound", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameMesh(Index, Name$)
+    Lua Set Function "NameMesh", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameMusic(Index, Name$)
+    Lua Set Function "NameMusic", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameFile(Index, Name$)
+    Lua Set Function "NameFile", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameEmitter(Index, Name$)
+    Lua Set Function "NameEmitter", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameSprite(Index, Name$)
+    Lua Set Function "NameSprite", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameMatrix(Index, Name$)
+    Lua Set Function "NameMatrix", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameVector(Index, Name$)
+    Lua Set Function "NameVector", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameDatabase(Index, Name$)
+    Lua Set Function "NameDatabase", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameLookup(Index, Name$)
+    Lua Set Function "NameLookup", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameMemblock(Index, Name$)
+    Lua Set Function "NameMemblock", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameBank(Index, Name$)
+    Lua Set Function "NameBank", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameCoroutine(Index, Name$)
+    Lua Set Function "NameCoroutine", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameMutex(Index, Name$)
+    Lua Set Function "NameMutex", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_NameAnimation(Index, Name$)
+    Lua Set Function "NameAnimation", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+````````````````````````````
+` Name File From File.dba  `
+````````````````````````````
+Function Lua_FileAdd(Index, Name$)
+    Index = Index + 1
+    
+    Lua Set Function "FileAdd", 2, 0
+    Lua Push Int Index
+    Lua Push String Name$
+    Lua Call
+EndFunction
+
+Function Lua_FileGet(Name$)
+    Lua Set Function "FileGet", 1, 1
+    Lua Push String Name$
+    Lua Call
+    
+    Index = Lua Return Int()    
+    If DebugMode = 1 Then If Index = 0 Then Message ("GetFile() with name: " + Name$ + " wasn't found!")    
+    
+    Index = Index - 1 ` Fix the Index
+EndFunction Index

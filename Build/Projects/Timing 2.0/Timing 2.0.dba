@@ -1,0 +1,46 @@
+Rem Project: Timing 2.0
+Rem Created: Tuesday, September 18, 2012
+
+Rem ***** Main Source File *****
+Sync On : Sync Rate 30
+
+TIME Setup
+
+Index = TIME Create Event Timer("MyFunction", 10, 1)
+
+Do
+    CLS
+    Text 0, 20, Str$((TIME Get Seconds(Index)))
+    
+    TIME Update Event Timers
+
+    Sync    
+Loop
+
+
+Function MyFunction()
+    Message "Hello World"
+EndFunction
+
+` Dependency function: DON'T FORGET THIS!
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Inclu`de 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+   x$ = Get File Name$()
+   x$ = Mid$("", 1)
+   x$ = Get Dir$()
+   x = Function Ptr Is Valid(345)
+   x = perftimer()
+EndFunction

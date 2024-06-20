@@ -1,0 +1,338 @@
+Rem ***** Included Source File *****
+Type Folder
+    Path$
+    Name$
+    SubLevel            
+EndType
+    
+Type File
+    Path$
+    Folder$
+    Name$    
+    Type$
+EndType
+
+Function Setup_File()    
+    ` Stores all the file data for easy access
+    Global Dim Folders() As Folder
+    Global Dim Files() As File
+
+    If LoadDatabase() = 0
+        ScanFolder("Media")
+        SaveAsDatabase()
+        LoadDatabase()
+    EndIf
+EndFunction
+
+Function SaveAsDatabase()    
+    If File Exist("Media\Database\Media.kfs") = 1 Then Delete File "Media\Database\Media.kfs"    
+    If File Exist("Media\Database\Media.dat") = 1 Then Delete File "Media\Database\Media.dat"
+
+    KFS Create 2, "Media\Database\Media.kfs", 33, 0, 0
+        
+    ` Create Data File            
+    DFS Create 1, "Media\Database\Media.dat", 0    
+    DFS Add Field 1, "String 499 As Path"
+    DFS Add Field 1, "String 99 As Folder"
+    DFS Add Field 1, "String 99 As Name"
+    DFS Add Field 1, "String 99 As Type"
+    DFS Finish 1
+    
+    Size = Array Count(Files())
+    
+    For Index = 0 To Size    
+        Record = DFS Add(1)
+                                        
+        DFS Put 1, "Path", Files(Index).Path$
+        DFS Put 1, "Folder", Files(Index).Folder$                
+        DFS Put 1, "Name", Files(Index).Name$                                            
+        DFS Put 1, "Type", Files(Index).Type$
+                                    
+        DFS Save 1, Record        
+        KFS Add 2, Lower$(Files(Index).Name$), Record
+    Next Index
+    
+    DFS Close 1
+    KFS Close 2
+EndFunction
+
+Function LoadDatabase()
+    If File Exist("Media\Database\Media.kfs") = 1 And File Exist("Media\Database\Media.dat") = 1
+        KFS Open 2, "Media\Database\Media.kfs"
+        DFS Open 1, "Media\Database\Media.dat"
+                
+        KFS Reset 2
+        
+        Count = KFS Count(2)
+        
+        For Index = 1 To Count
+            Record = KFS Next(2)            
+            DFS Load 1, Record    
+            
+            If LoadFileArray = 1
+                Add To Stack Files()
+                Files().Path$ = DFS Get$(2, "Path")    
+                Files().Folder$ = DFS Get$(2, "Folder")    
+                Files().Name$ = DFS Get$(2, "Name")    
+                Files().Type$ = DFS Get$(2, "Type")    
+            EndIf
+            
+            Name$ = DFS Get$(2, "Name")            
+            `Lua_FileAdd(Record, Name$)
+        Next Index
+    Else
+        ExitFunction 0
+    EndIf        
+EndFunction 1
+
+Function File_WriteList(FolderName$, FolderPath$)
+    If File Exist(FolderPath$ + "\" + FolderName$ + ".txt") = 0
+        Open To Write 1, FolderPath$ + "\" + FolderName$ + ".txt"
+        
+        CurrentDir$ = Get Dir$() : Set Dir FolderPath$
+                
+        Find First    
+        FileName$ = Get File Name$()
+        
+        While Get File Type() <> -1                            
+            Find Next        
+            FileName$ = Get File Name$()
+            
+            If FileName$ <> FolderName$ + ".txt" And Mid$(FileName$, 1) <> "."
+                Write String 1, FileName$
+                FileCount = FileCount + 1
+            EndIf
+        EndWhile
+           
+        Close File 1 : Set Dir CurrentDir$       
+        
+        If FileCount = 0 Then Delete File FolderPath$ + "\" + FolderName$ + ".txt"
+    Else
+        ExitFunction 0
+    EndIf
+EndFunction 1
+
+Function DeleteFileDatabase()
+    If File Exist("Media\Database\Media.kfs") = 1 Then Delete File "Media\Database\Media.kfs"
+    If File Exist("Media\Database\Media.dat") = 1 Then Delete File "Media\Database\Media.dat"
+EndFunction
+
+Function ScanFolder(Dir$)
+    CurrentDir$ = Get Dir$() :  Set Dir Dir$
+
+    Find First    
+    FileType = HandleFile(0)
+    
+    While FileType <> -1        
+        If FileType = 1 Then FolderCount = FolderCount + 1
+            
+        Find Next
+        FileType = HandleFile(0)        
+    EndWhile
+    
+    Repeat
+        Count = FolderCount
+        FolderCount = 0
+                 
+        ArrayCount = Array Count(Folders())
+        
+        For Index = 0 To ArrayCount
+            If Folders(Index).SubLevel = SubLevel            
+                Set Dir Folders(Index).Path$                
+                                
+                Find First
+                FileType = HandleFile(SubLevel + 1)
+                If FileType = 1 Then FolderCount = FolderCount + 1
+                                
+                While FileType <> -1        
+                    If FileType = 1 Then FolderCount = FolderCount + 1
+                        
+                    Find Next
+                    FileType = HandleFile(SubLevel + 1)                        
+                EndWhile                
+            EndIf            
+        Next Index        
+            
+        SubLevel = SubLevel + 1
+    Until FolderCount = 0
+    
+    `If DebugMode = 1 Then Send_Message$("File Search Completed!")                        
+    Set Dir CurrentDir$
+EndFunction
+
+Function HandleFile(SubLevel)    
+    FileType = Get File Type() 
+    FileName$ = Get File Name$()
+
+    If Mid$(FileName$, 1) <> "."
+        If FileType = 1
+            Add To Stack Folders()
+        
+            Folders().Path$ = Get Dir$() + "\" + FileName$
+            Folders().Name$ = FileName$                    
+            Folders().SubLevel = SubLevel            
+        EndIf
+        
+        If FileType = 0
+            Add To Stack Files()
+        
+            ` It will only work if it finds an extention DBP uses.
+            If GetExtentionType(GetFileExtension$(FileName$)) <> ""                            
+                `If DebugMode = 1 Then Send_Message$("File Search: " + FileName$ + " found!")
+                                
+                Files().Path$ = Get Dir$() + "\" + FileName$
+                Files().Name$ = RemoveExtension$(FileName$)                    
+                Files().Folder$ = Get Dir$()    
+                Files().Type$ = GetExtentionType(GetFileExtension$(FileName$))        
+                                    
+                `Lua_FileAdd(Array Count(Files()), Files().Name$)                        
+            EndIf                    
+        EndIf
+    EndIf
+EndFunction FileType
+
+Function RemoveExtension$(FilePath$)
+    Size = Fast Len(FilePath$)
+    
+    For Index = 1 To 4
+        If Mid$(FilePath$, Size - Index, 1) = "."
+            FilePath$ = Fast Left$(FilePath$, Size - (Index + 1))
+            Exit            
+        EndIf
+    Next Index
+    
+    ` Report error if no file extension is found!
+    If FilePath$ = ""
+        If DebugMode = 1 
+            `Send_Error$("FilePath: " + FilePath$ + " doesn't contain an extension!")        
+        EndIf
+    EndIf    
+EndFunction FilePath$
+
+` Gets the file extension from a path or filename with the extension
+Function GetFileExtension$(FilePath$)
+    Size = Fast Len(FilePath$)
+    
+    For Index = 1 To 4
+        If Mid$(FilePath$, Size - Index, 1) = "."
+            FileExtension$ = Fast Right$(FilePath$, Index + 1)
+            Exit            
+        EndIf
+    Next Index        
+    
+    ` Report error if no file extension is found!
+    If FileExtension$ = ""    
+        If DebugMode = 1
+            `Send_Error$("FilePath: " + FilePath$ + " doesn't contain an extension!")
+        EndIf
+    EndIf    
+EndFunction FileExtension$
+
+Function GetPathFolder(Level, Path$)
+    Size = Fast Len(Path$)    
+    
+    ` Remove C:\ or whatever drive letter
+    If Mid$(Path$, 2, 1) = ":" 
+        Path$ = Fast Right$(Path$, Size - 3)
+        Size = Size - 3
+    EndIf
+    
+    ` Remove the extention and the file name
+    If Mid$(Path$, Size - 3, 1) = "." 
+        Index = Size - 4
+        Repeat : Dec Index, 1 : Until Mid$(Path$, Index, 1) = "\"
+        Path$ = Fast Left$(Path$, Size - (Size - Index) - 1)
+    EndIf
+    
+    ` Remove the extention and the file name
+    If Mid$(Path$, Size - 4, 1) = "."
+        Index = Size - 5        
+        Repeat : Dec Index, 1 : Until Mid$(Path$, Index, 1) = "\"
+        Path$ = Fast Left$(Path$, Size - (Size - Index) - 1)
+    EndIf
+    
+    ` Split up the string
+    Split String Path$, "\"
+    
+    ` Get the word at index Level
+    Folder$ = Get Split Word$(Split Count() - (Level - 1))       
+EndFunction Folder$
+
+Function GetExtentionType(Extention$)
+    Extention$ = Fast Upper$(Extention$)
+
+    Select Extention$
+        Case ".BMP"
+            Type$ = "Image"
+        EndCase
+        
+        Case ".JPG"
+            Type$ = "Image"
+        EndCase
+        
+        Case ".TGA"
+            Type$ = "Image"
+        EndCase
+        
+        Case ".DDS"
+            Type$ = "Image"
+        EndCase
+        
+        Case ".DIB"
+            Type$ = "Image"
+        EndCase
+        
+        Case ".PNG"
+            Type$ = "Image"
+        EndCase
+        
+        Case ".X" 
+            Type$ = "Object"
+        EndCase
+        
+        Case ".DBO"
+            Type$ = "Object"
+        EndCase
+            
+        Case ".3DS"
+            Type$ = "Object"
+        EndCase
+        
+        Case ".MDL"
+            Type$ = "Object"
+        EndCase
+        
+        Case ".MD2"
+            Type$ = "Object"
+        EndCase    
+        
+        Case ".MD3"
+            Type$ = "Object"
+        EndCase    
+        
+        Case ".FX"
+            Type$ = "Effect"
+        EndCase
+        
+        Case ".WAV"
+            Type$ = "Sound"
+        EndCase
+        
+        Case ".MIDI"
+            Type$ = "Music"
+        EndCase
+        
+        Case ".MP3"
+            Type$ = "Music"
+        EndCase
+        
+        Case ".ANIM"
+            Type$ = "Animation"
+        EndCase
+        
+        Case Default
+            Type$ = ""
+        EndCase
+        
+    EndSelect
+EndFunction Type$

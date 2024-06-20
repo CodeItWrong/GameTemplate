@@ -1,0 +1,48 @@
+Rem Project: Resource Example
+Rem Created: Sunday, July 08, 2012
+
+Rem ***** Main Source File *****
+` I would suggest either choosing between using Next Resource commands or free object commands
+` to prevent a problem. I do have a hybrid command called Next Free Resource command which would
+` fix this problem.
+
+MyCube = DR Next Object()
+Make Object Cube MyCube, 10
+Move Object MyCube, 10
+
+MySecondCube = DR Make Object Cube(10)
+Move Object MySecondCube, -10
+
+MyThirdCube = DR Free Object()
+Make Object Cube MyThirdCube, 10
+Move Object Up MyThirdCube, 10
+
+` If I would have created this object I would have gotten an error!
+MyForthCube = DR Next Object()
+
+Do
+	Text 0, 0, "Careful with using free resource commands. Notice how the indexes of the last two match."	
+    Text 0, 20, Str$(MyCube)
+    Text 0, 40, Str$(MySecondCube)
+    Text 0, 60, Str$(MyThirdCube)
+    Text 0, 80, Str$(MyForthCube)
+    
+Loop
+
+` Dependency function: DON'T FORGET THIS!
+Function Dependency()
+   x = Object Exist(1)    `Include Basic3D
+   x = Sprite Exist(1)    `Include 
+   x = Particles Exist(1)    `Include 
+   x = Vector Exist(1)    `Include 
+   x = Memblock Exist(1)    `Include 
+   x = Camera Exist(1)    `Include 
+   x = Image Exist(1)    `Include 
+   x = Effect Exist(1)    `Include 
+   x = Sound Exist(1)    `Include 
+   x = Mesh Exist(1)    `Include 
+   x = Music Exist(1)    `Include 
+   x = File Exist("")    `Include 
+   x = Matrix Exist(1)    `Include 
+   x = Dll Exist(1)    `Include    
+EndFunction
