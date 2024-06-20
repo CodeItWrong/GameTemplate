@@ -10,10 +10,12 @@ Requirements:  You must have the required plugins. If you do not have the Dark D
 	o	Unity: http://www.thegamecreators.com/?m=view_product&id=2081
 	o	Barnski’s Lua: http://forum.thegamecreators.com/?m=forum_view&t=74095&b=5
 
+
 Debugger (Alpha): The debugger is both build into the template and the Command Center. The command center is for debugging, message logging, and error handing. You can also pause the game from the Command Center. The debugging features are currently in the alpha stage. This feature will be updated in future.
 •	Error Reporting: Reports errors and pauses the game. You can “[R]esume - [S]ave and Exit - [E]xit”. “Resume” will ignore the error. “Save and Exit“will save the error log and shutdown the game. “Exit” will just shutdown the game.
 •	Pause: You can pause the game by pressing the P key on the keyboard when the Command Console window is in focus.
 •	Console: The warnings and messages can be outputted via console if ConsoleMode = 1. 
+
 
 Game Template Flags:
 •	Display_FPS: Displays the Frames Per Second in the right hand corner if set to 1.
@@ -28,18 +30,22 @@ Game Template Flags:
 •	ConsoleMode: If ConsoleMode is set to 1 then a console will be opened and display all important data including performance data.
 •	WindowOn: If WindowOn is set to 1 then the game will be displayed in a Window and if set to 0 it will be full screen.
 
+
 Game Template Loop:
 •	This loop is run if the Escape Key is not pressed and the Game Template isn’t shutting down
 •	In the loop it will update the performance code
 •	When the Escape Key is press or the Game Template is Shutting Down then it will run the close function
 
+
 While EscapeKey() = 0 And ShuttingDown = 0
 Update_Performance()        
 EndWhile
 
+
 Main Loop:
 •	This is the function that will be called by the performance function. 
 •	The main loop is for logic
+
 
 Function Loop_Main()
     Update_Main()
@@ -50,19 +56,23 @@ Display Loop:
 •	The display loop is for anything that needs to be rendered or outputted to the screen
 •	Put these commands in the Display Loop: Print, Sync, Camera, or Sprite Commands
 
+
 Function Loop_Display()    
     Update_Display()
 EndFunction
 
 Function Tags
 
+
 Setup Functions: 
 •	A function with the “Setup_” tag will be called first. 
 •	The Setup functions are used to setup a class
 
+
 Coroutines: 
 •	A function with the “Coroutine_” tag is considered a couroutine
 •	A coroutine requires the Update_Coroutines() function to be called within the loop
+
 
 Threads:
 •	A function with the “Thread_” tag is considered a Thread. (Used in Multi-Threading class)
