@@ -1,0 +1,1 @@
+BRC32.exe -r cmdtable.rc

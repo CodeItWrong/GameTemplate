@@ -1,0 +1,12 @@
+; dlltool --base-file C:\Users\DIGITA~1\AppData\Local\Temp/cca06796.base --output-exp FileSearch.exp --dllname FileSearch.dll --output-def libFileSearch.def --exclude-symbol=DllMainCRTStartup@12 --def C:\Users\DIGITA~1\AppData\Local\Temp/cca06796.def --output-lib libFileSearch.a
+EXPORTS
+	FileCount @ 1
+	FileSearch @ 2
+	FolderCount @ 3
+	GetFileFolder @ 4
+	GetFileName @ 5
+	GetFilePath @ 6
+	GetFolderName @ 7
+	GetFolderPath @ 8
+	GetFolderSubLevel @ 9
+	HandleFile @ 10

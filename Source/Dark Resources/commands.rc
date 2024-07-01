@@ -1,0 +1,111 @@
+// Resource Script
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE        102
+#define _APS_NEXT_COMMAND_VALUE         40001
+#define _APS_NEXT_CONTROL_VALUE         1001
+#define _APS_NEXT_SYMED_VALUE           101
+#endif
+#endif
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+//#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    // Your string table goes here.
+    // You must have at least ONE command for this to compile correctly.
+    // Here is an example:
+    /*
+        1 "STARTUP%0%StartupFunction"      // void StartupFunction(void);
+        2 "GETVALUE[%L%GetValueFunction"   // int GetValueFunction(void);
+        3 "GETSUM[%LLL%GetSumFunction"     // int GetSumFunction(int p0, int p1);
+    */
+    
+    1 "DR Next Object[%L%DRNextObject"   // DLLCMDC int DRNextObject()
+
+// Extra information about the string tables, for quick lookup.
+/* L = Integer                         ( IN use "int" )         ( OUT use "int" )
+   F = Float                           ( IN use "float" )       ( OUT use "DWORD" )
+   S = String                          ( IN use "LPSTR" )       ( OUT use "DWORD" )
+   O = Double Float (capital o)        ( IN use "double" )      ( OUT use "double" ) 
+   R = Double Integer (capital r)      ( IN use "LONGLONG" )    ( OUT use "LONGLONG" ) 
+   D = Boolean, BYTE, WORD and DWORD   ( IN use "DWORD" )       ( OUT use "DWORD" )
+   0 = Zero Character (no param)       ( IN use "VOID" )        ( n/a )                 
+   H = Array                           ( IN use ? )             ( OUT use ? )
+   X = Any type                        ( IN use "const void*" ) ( OUT use "const void*" )
+   A = Special List Processing         ( IN use ? )             ( OUT use ? )
+   * = Designate a return type                                                             */
+END
+
+#endif    // English resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED

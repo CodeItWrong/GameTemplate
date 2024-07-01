@@ -1,0 +1,15 @@
+; dlltool --base-file C:\Users\DIGITA~1\AppData\Local\Temp/cca11784.base --output-exp Timing.exp --dllname Timing.dll --output-def libTiming.def --exclude-symbol=DllMainCRTStartup@12 --def C:\Users\DIGITA~1\AppData\Local\Temp/cca11784.def --output-lib libTiming.a
+EXPORTS
+	CreateEventTimer @ 1
+	CreateTimer @ 2
+	GetDays @ 3
+	GetHours @ 4
+	GetMilliSeconds @ 5
+	GetMinutes @ 6
+	GetOldTime @ 7
+	GetPerfTime @ 8
+	GetSeconds @ 9
+	IsDay @ 10
+	IsNight @ 11
+	SetGameTimeFactor @ 12
+	SetupTimers @ 13

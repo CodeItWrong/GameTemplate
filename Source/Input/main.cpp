@@ -1,0 +1,318 @@
+// Include the header
+#include "header.h"
+// Include other headers here.
+
+
+// Whatever code here.
+
+DLLCMDC void SetupInput()
+{
+
+}
+
+DLLCMDC void ScanInput()
+{
+    StartFunction
+    
+    int Code;
+    
+    for (int Index = 0; Index =< MAX_KEYS; Index++)
+    {
+        if (dbKeyState(Index) == 1)   
+        {
+            Code = Index;                      
+        }
+        else {
+            Code = 0;        
+        }
+        
+        //Key$ = ScanCode Name$(Code)
+        // From matrix commands
+    }
+               
+}
+
+// 2 Methods:
+// Use function pointers and call them
+// Check a key to see if it is pressed with my keystate (I think mine would be faster) (Check array)
+// Check if key is pressed maybe make one for each key?
+
+
+//Function ScanInput()       
+//    AnyPressed = 0 : AnyDown = 0 : AnyReleased = 0
+//                   
+//    ````````````````
+//    ` Keys Pressed `
+//    ````````````````
+//        
+//    For Index = 1 To MAX_KEYS
+//        If KeyState(Index) = 1
+//            Code = Index            
+//        Else
+//            Code = 0            
+//        EndIf        
+//                    
+//        Key$ = ScanCode Name$(Code)
+//               
+//        If KeyPressed(Code) = 0        
+//            NewKey = FindKeyIndex()
+//                
+//            If NewKey <> - 1
+//                Keys(NewKey) = Code        
+//        
+//                Pointer = Get Ptr To Function("KeyPressed_" + Upper$(Key$))
+//                
+//                If Function Ptr Is Valid(Pointer) = 1        
+//                    Call Function Ptr Pointer                              
+//                EndIf                
+//                
+//                AnyPressed = 1
+//            EndIf
+//        EndIf
+//
+//        If EscapeKey() = 1 Then ExitFunction
+//    Next Index 
+//    
+//    ````````````````````````````````
+//    ` Keys Released/Keys Held Down `
+//    ````````````````````````````````
+//    
+//    Count = Array Count(Keys())
+//
+//    If Size <> -1
+//        For Index = 0 To Count
+//            Key = Keys(Index)
+//            Key$ = ScanCode Name$(Key)
+//                
+//            If Key <> 0
+//                If KeyState(Key) = 0
+//                    Pointer = Get Ptr To Function("KeyReleased_" + Upper$(Key$))
+//                    
+//                    If Function Ptr Is Valid(Pointer) = 1        
+//                        Call Function Ptr Pointer                            
+//                    EndIf                
+//                    
+//                    AnyReleased = 1 : Keys(Index) = 0
+//                Else
+//                    Pointer = Get Ptr To Function("KeyDown_" + Upper$(Key$))
+//                    
+//                    If Function Ptr Is Valid(Pointer) = 1        
+//                        Call Function Ptr Pointer                            
+//                    EndIf
+//                    
+//                    AnyDown = 1
+//                EndIf                        
+//            EndIf
+//        Next Index
+//    EndIf
+//    
+//    `````````````````````````            
+//    ` Pressed Mouse Buttons `
+//    `````````````````````````
+//    
+//    For Index = 0 To MAX_MOUSEBUTTONS - 1
+//        If Mouse_GetState(Index) = 1
+//            Code = (Index + 1)
+//        Else
+//            Code = -1
+//        EndIf    
+//    
+//        If MousePressed(Code) = 0    
+//            NewClick = FindMouseIndex()            
+//            Name$ = MouseName$(Code)
+//                
+//            If NewClick <> - 1
+//                Mouse(NewClick) = Code    
+//                
+//                Pointer = Get Ptr To Function("MousePressed_" + Name$)
+//                    
+//                If Function Ptr Is Valid(Pointer) = 1        
+//                    Call Function Ptr Pointer
+//                EndIf
+//            EndIf
+//        EndIf    
+//    Next Index     
+//    
+//    ````````````````````````````````````````````````````    
+//    ` Released Mouse Buttons / Mouse Buttons Held Down `
+//    ````````````````````````````````````````````````````
+//        
+//    Count = Array Count(Mouse())
+//    
+//    For Index = 0 To Count
+//        Code = Mouse(Index)
+//        Name$ = MouseName$(Code)
+//        
+//        If Code <> 0
+//            If Mouse_GetState(Code - 1) = 0
+//                Pointer = Get Ptr To Function("MouseReleased_" + Name$)
+//            
+//                If Function Ptr Is Valid(Pointer) = 1        
+//                    Call Function Ptr Pointer        
+//                EndIf                
+//            
+//                Mouse(Index) = 0
+//            Else
+//                Pointer = Get Ptr To Function("MouseDown_" + Name$)
+//            
+//                If Function Ptr Is Valid(Pointer) = 1        
+//                    Call Function Ptr Pointer
+//                EndIf    
+//            EndIf
+//        EndIf
+//    Next Index    
+//    
+//    ` Any Key: AnyPressed = 1 Or AnyReleased = 1 Or AnyDown = 1
+//    ` Any Key Down: AnyDown = 1
+//    ` Any Key Pressed: AnyPressed = 1
+//    ` Any Key Released: AnyReleased = 1
+//            
+//    ` No Key: AnyPressed = 0 And AnyReleased = 0 And AnyDown = 0
+//    ` No Key Down: AnyDown = 0
+//    ` No Key Pressed: AnyPressed = 0
+//    ` No Key Released: AnyReleased = 0
+//                         
+//    ` Any Key: AnyPressed = 1 Or AnyReleased = 1 Or AnyDown = 1
+//    If AnyPressed = 1 Or AnyReleased = 1 Or AnyDown = 1
+//        Pointer = Get Ptr To Function("AnyKey")
+//            
+//        If Function Ptr Is Valid(Pointer) = 1        
+//            Call Function Ptr Pointer
+//        EndIf  
+//    EndIf
+//    
+//    ` Any Key Down: AnyDown = 1
+//    If AnyDown = 1
+//        Pointer = Get Ptr To Function("AnyKey_Down")
+//            
+//        If Function Ptr Is Valid(Pointer) = 1        
+//            Call Function Ptr Pointer
+//        EndIf  
+//    EndIf
+//    
+//    ` Any Key Pressed: AnyPressed = 1
+//    If AnyPressed = 1
+//        Pointer = Get Ptr To Function("AnyKey_Pressed")
+//            
+//        If Function Ptr Is Valid(Pointer) = 1        
+//            Call Function Ptr Pointer
+//        EndIf  
+//    EndIf
+//    
+//    ` Any Key Released: AnyReleased = 1
+//    If AnyReleased = 1
+//        Pointer = Get Ptr To Function("AnyKey_Released")
+//            
+//        If Function Ptr Is Valid(Pointer) = 1        
+//            Call Function Ptr Pointer
+//        EndIf  
+//    EndIf
+//    
+//    ` No Key: AnyPressed = 0 And AnyReleased = 0 And AnyDown = 0
+//    If AnyPressed = 0 And AnyReleased = 0 And AnyDown = 0
+//        Pointer = Get Ptr To Function("NoKey")
+//            
+//        If Function Ptr Is Valid(Pointer) = 1        
+//            Call Function Ptr Pointer
+//        EndIf  
+//    EndIf
+//    
+//    ` No Key Down: AnyDown = 0
+//    If AnyDown = 0
+//        Pointer = Get Ptr To Function("NoKey_Down")
+//            
+//        If Function Ptr Is Valid(Pointer) = 1        
+//            Call Function Ptr Pointer
+//        EndIf 
+//    EndIf
+//    
+//    ` No Key Pressed: AnyPressed = 0
+//    If AnyPressed = 0
+//        Pointer = Get Ptr To Function("NoKey_Pressed")
+//            
+//        If Function Ptr Is Valid(Pointer) = 1        
+//            Call Function Ptr Pointer
+//        EndIf 
+//    EndIf
+//    
+//    ` No Key Released: AnyReleased = 0
+//    If AnyReleased = 0
+//        Pointer = Get Ptr To Function("NoKey_Released")
+//            
+//        If Function Ptr Is Valid(Pointer) = 1        
+//            Call Function Ptr Pointer
+//        EndIf 
+//    EndIf
+//EndFunction
+//
+//Function KeyPressed(Code)
+//    For Index = 0 To Array Count(Keys())
+//        If Code = Keys(Index)
+//            State = 1 : ` Pressed
+//        EndIf
+//    Next Index    
+//EndFunction State
+//
+//Function MousePressed(Code)
+//    For Index = 0 To Array Count(Mouse())
+//        If Code = Mouse(Index)
+//            State = 1 : ` Pressed
+//        EndIf
+//    Next Index    
+//EndFunction State
+//
+//Function Mouse_GetState(Code)
+//    Click = MouseClick() : State = 0
+//    
+//    If Code = 0
+//        If Click = 1 Or Click = 3 Or Click = 5 Or Click = 7
+//            State = 1
+//        EndIf
+//    EndIf
+//    
+//    If Code = 1
+//        If Click = 2 Or Click = 3 Or Click = 6 Or Click = 7
+//            State = 1
+//        EndIf
+//    EndIf
+//    
+//    If Code = 2
+//        If Click = 4 Or Click = 6 Or Click = 7 Or Click = 5
+//            State = 1
+//        EndIf
+//    EndIf
+//EndFunction State
+//
+//Function MouseName$(Code)
+//    Select Code
+//        Case 1
+//            Name$ = "Left"
+//        EndCase
+//        
+//        Case 2
+//            Name$ = "Right"
+//        EndCase
+//        
+//        Case 3
+//            Name$ = "Middle"
+//        EndCase
+//    EndSelect
+//EndFunction Name$
+//
+//Function FindKeyIndex()
+//    If Keys(0) = 0 Then ExitFunction 0        
+//    
+//    Repeat 
+//        Index = Index + 1 
+//        If Index > Array Count(Keys()) Then ExitFunction -1
+//    Until Keys(Index) = 0    
+//EndFunction Index
+//
+//Function FindMouseIndex()
+//    If Mouse(0) = 0 Then ExitFunction 0        
+//    
+//    Repeat 
+//        Index = Index + 1 
+//        If Index > Array Count(Mouse()) Then ExitFunction -1
+//    Until Mouse(Index) = 0    
+//EndFunction Index
